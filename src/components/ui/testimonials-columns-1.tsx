@@ -51,7 +51,7 @@ export const TestimonialsColumn = ({
 
                 return (
                   <div
-                    className="p-8 rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 max-w-xs w-full select-none"
+                    className="p-5 sm:p-6 md:p-8 rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 max-w-xs w-full select-none"
                     key={`${index}-${i}`}
                   >
                     <p className="text-slate-600 leading-relaxed text-sm">"{displayQuote}"</p>

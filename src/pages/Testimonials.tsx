@@ -81,7 +81,7 @@ export default function Testimonials() {
 
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[660px] overflow-hidden">
+          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[500px] md:max-h-[660px] overflow-hidden">
             <TestimonialsColumn testimonials={firstColumn} duration={18} />
             <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={22} />
             <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={20} />
