@@ -6,15 +6,60 @@ import { clientNames } from '../data/site';
 import { TestimonialsColumn } from '../components/ui/testimonials-columns-1';
 
 const testimonials = [
-  { name: 'Rajesh Verma', role: 'Zonal Manager', quote: 'Exceptional, detailed, and accurate retail lending valuation services. Their use of technology sets them apart in the industry.' },
-  { name: 'Amit Singhania', role: 'Director, Real Estate Group', quote: 'Impressive technical expertise in cost monitoring, scheduling, and ensuring quality delivery for our commercial townships.' },
-  { name: 'Priya Desai', role: 'VP-Business Development', quote: 'Their strategic advisory team provided thorough, data-driven feasibility studies that were instrumental in our market expansion.' },
-  { name: 'Vikram Sodhi', role: 'Plant Head', quote: 'Meticulous attention to detail and professional integrity during our industrial plant risk inspections. Highly recommended.' },
-  { name: 'Suresh Menon', role: 'Chief Risk Officer', quote: 'They consistently deliver beyond expectations, providing deep market insights and ethical approaches for critical financial decisions.' },
-  { name: 'Neha Kapoor', role: 'Head — Credit Operations', quote: 'Turnaround times on retail portfolios are the best we have worked with, without ever compromising on report quality.' },
-  { name: 'Arvind Rao', role: 'CFO, Manufacturing Group', quote: 'Their plant and machinery team handled a complex IndAS impairment exercise with complete professionalism.' },
-  { name: 'Kavita Sharma', role: 'GM — Recovery', quote: 'Distress valuations were defensible, well-documented, and stood up to every internal and external review.' },
-  { name: 'Manoj Tiwari', role: 'Project Director', quote: 'Monitoring reports were always on time and caught cost deviations early enough for us to act.' },
+  {
+    name: 'Rajesh Verma',
+    role: 'Zonal Manager',
+    quote: 'Exceptional, detailed, and accurate retail lending valuation services. Their use of technology sets them apart in the industry.',
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Amit Singhania',
+    role: 'Director, Real Estate Group',
+    quote: 'Impressive technical expertise in cost monitoring, scheduling, and ensuring quality delivery for our commercial townships.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Priya Desai',
+    role: 'VP-Business Development',
+    quote: 'Their strategic advisory team provided thorough, data-driven feasibility studies that were instrumental in our market expansion.',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Vikram Sodhi',
+    role: 'Plant Head',
+    quote: 'Meticulous attention to detail and professional integrity during our industrial plant risk inspections. Highly recommended.',
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Suresh Menon',
+    role: 'Chief Risk Officer',
+    quote: 'They consistently deliver beyond expectations, providing deep market insights and ethical approaches for critical financial decisions.',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Neha Kapoor',
+    role: 'Head — Credit Operations',
+    quote: 'Turnaround times on retail portfolios are the best we have worked with, without ever compromising on report quality.',
+    image: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Arvind Rao',
+    role: 'CFO, Manufacturing Group',
+    quote: 'Their plant and machinery team handled a complex IndAS impairment exercise with complete professionalism.',
+    image: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Kavita Sharma',
+    role: 'GM — Recovery',
+    quote: 'Distress valuations were defensible, well-documented, and stood up to every internal and external review.',
+    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
+  {
+    name: 'Manoj Tiwari',
+    role: 'Project Director',
+    quote: 'Monitoring reports were always on time and caught cost deviations early enough for us to act.',
+    image: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=250&auto=format&fit=crop&crop=face'
+  },
 ];
 
 const firstColumn = testimonials.slice(0, 3);
