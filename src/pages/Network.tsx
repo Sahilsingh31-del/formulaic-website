@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building, MapPin } from 'lucide-react';
 import { Counter, PageHero, Reveal } from '../components/animated';
+import { officeLocations } from '../data/offices';
 
 const states = [
   'Maharashtra', 'New Delhi & NCR', 'Uttar Pradesh', 'Gujarat', 'Karnataka', 'Tamil Nadu',
@@ -16,11 +17,14 @@ const offices = [
 ];
 
 export default function Network() {
+  const officeLocationCount = officeLocations.length;
+  const mappedStatesCount = new Set(officeLocations.map((office) => office.state)).size;
+
   return (
     <div className="flex w-full flex-col bg-white">
       <PageHero
         eyebrow="PAN India network"
-        title="100+ offices. 17+ states. One standard."
+        title={`${officeLocationCount} mapped offices. ${mappedStatesCount} states. One standard.`}
         description="Strategic satellite offices cover all parts of major cities efficiently, connected by high-speed networks and shared digital platforms."
         image="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2044&auto=format&fit=crop"
       />
@@ -29,10 +33,10 @@ export default function Network() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
             {[
-              [100, '+', 'Offices'],
-              [17, '+', 'States'],
+              [officeLocationCount, '', 'Mapped offices'],
+              [mappedStatesCount, '', 'Mapped states'],
               [800, '+', 'Professionals'],
-              [30, '+', 'Major cities'],
+              [officeLocationCount, '', 'Major cities'],
             ].map(([value, suffix, label], index) => (
               <Reveal key={label as string} delay={index * 0.08}>
                 <div className="font-serif text-4xl font-bold md:text-5xl">

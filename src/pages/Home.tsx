@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { type MouseEvent } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import {
   ArrowRight,
   Award,
@@ -8,16 +8,32 @@ import {
   CheckCircle2,
   ClipboardCheck,
   FileText,
-  LineChart,
   MousePointer2,
   Sparkles,
 } from 'lucide-react';
-import { Counter, Marquee, Reveal, TiltCard } from '../components/animated';
+import { Counter, Reveal, ScrollMarquee } from '../components/animated';
+import { FlipWords } from '@/components/ui/flip-words';
+import { brandAssets } from '../data/brandAssets';
+import { officeLocations } from '../data/offices';
 import { clientNames, sectors, services } from '../data/site';
 
-const headline = ['Valuation,', 'advisory', 'and', 'project', 'intelligence.'];
+const heroFlipWords = [
+  'project intelligence.',
+  'asset decisions.',
+  'lender reporting.',
+  'field intelligence.',
+  'market advisory.',
+];
+const officeLocationCount = officeLocations.length;
+const heroPhotos = [
+  'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069&auto=format&fit=crop',
+];
 
 export default function Home() {
+  const [activeHeroPhoto, setActiveHeroPhoto] = useState(0);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
   const glowX = useSpring(useTransform(mx, [0, 1], [-40, 40]), { stiffness: 60, damping: 20 });
@@ -29,6 +45,14 @@ export default function Home() {
     my.set((e.clientY - rect.top) / rect.height);
   };
 
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroPhoto((current) => (current + 1) % heroPhotos.length);
+    }, 4200);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   const processSteps = [
     { icon: MousePointer2, label: 'Request', text: 'Share asset, location, and purpose.' },
     { icon: ClipboardCheck, label: 'Inspect', text: 'Technical experts capture evidence.' },
@@ -39,20 +63,31 @@ export default function Home() {
   return (
     <div className="flex w-full flex-col overflow-hidden">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-slate-950 text-white" onMouseMove={onHeroMouseMove}>
-        <div className="absolute inset-0 z-0 opacity-35">
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-            alt="Modern architecture"
-            className="h-full w-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.45),transparent_34%),linear-gradient(110deg,#020617_0%,rgba(15,23,42,0.96)_46%,rgba(15,23,42,0.55)_100%)]" />
+      <section className="relative min-h-[calc(100dvh-5rem)] overflow-hidden bg-slate-50 text-slate-950" onMouseMove={onHeroMouseMove}>
+        <div className="absolute inset-0 z-0">
+          {heroPhotos.map((photo, index) => (
+            <motion.img
+              key={photo}
+              src={photo}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              initial={false}
+              animate={{
+                opacity: activeHeroPhoto === index ? 1 : 0,
+                scale: activeHeroPhoto === index ? 1.03 : 1.06,
+              }}
+              transition={{ duration: 1.4, ease: 'easeInOut' }}
+              referrerPolicy="no-referrer"
+            />
+          ))}
+          {/* Left: readable text zone. Right: photos stay sharp and visible */}
+          <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(248,250,252,0.94)_0%,rgba(248,250,252,0.72)_38%,rgba(255,255,255,0.28)_62%,rgba(255,255,255,0.08)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_40%,rgba(37,99,235,0.08),transparent_42%)]" />
         </div>
 
         {/* Cursor-following glow */}
         <motion.div
-          className="pointer-events-none absolute left-1/3 top-1/4 h-96 w-96 rounded-full bg-blue-500/25 blur-3xl"
+          className="pointer-events-none absolute left-1/3 top-1/4 h-96 w-96 rounded-full bg-blue-500/15 blur-3xl"
           style={{ x: glowX, y: glowY }}
         />
         <motion.div
@@ -62,38 +97,36 @@ export default function Home() {
         />
 
         {/* Floating grid dots */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(148,163,184,0.12)_1px,transparent_1px)] bg-[length:36px_36px]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(15,23,42,0.08)_1px,transparent_1px)] bg-[length:36px_36px]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 md:py-28 lg:py-32">
-          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-            <div>
+        <div className="relative z-10 mx-auto flex min-h-[calc(100dvh-5rem)] max-w-7xl flex-col justify-center px-6 py-16 md:py-20">
+          <div className="max-w-4xl">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-blue-100 backdrop-blur">
-                  <Sparkles className="h-4 w-4 text-cyan-300" />
+                <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-blue-700 shadow-sm backdrop-blur">
+                  <Sparkles className="h-4 w-4 text-cyan-500" />
                   Best Valuation Agency in India
                 </span>
               </motion.div>
 
-              <h1 className="mb-7 font-serif text-5xl font-bold leading-[0.95] md:text-6xl lg:text-7xl">
-                {headline.map((word, i) => (
-                  <motion.span
-                    key={word}
-                    className={
-                      i === 0
-                        ? 'mr-4 inline-block'
-                        : 'mr-4 inline-block bg-gradient-to-r from-blue-300 via-cyan-200 to-white bg-clip-text text-transparent'
-                    }
-                    initial={{ opacity: 0, y: 30, rotateX: 45 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </h1>
+              <motion.h1
+                className="mb-7 font-serif text-5xl font-bold leading-tight md:text-6xl lg:text-7xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <span className="block text-slate-950">Valuation, advisory, and</span>
+                <span className="mt-2 block text-blue-700">
+                  <FlipWords
+                    words={heroFlipWords}
+                    duration={2800}
+                    animateLetters={false}
+                    className="font-serif text-5xl font-bold text-blue-700 md:text-6xl lg:text-7xl"
+                  />
+                </span>
+              </motion.h1>
 
               <motion.p
-                className="mb-10 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl"
+                className="mb-10 max-w-2xl text-lg leading-relaxed text-slate-600 md:text-xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
@@ -117,83 +150,30 @@ export default function Home() {
                 </Link>
                 <Link
                   to="/process"
-                  className="flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                  className="flex items-center justify-center rounded-full border border-slate-200 bg-white/80 px-8 py-4 font-semibold text-slate-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white"
                 >
                   See Our Process
                 </Link>
               </motion.div>
-            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 24 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-            >
-              <TiltCard className="relative">
-                <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
-                  <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/80 p-5">
-                    <div className="mb-6 flex items-center justify-between">
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.25em] text-blue-200">Live command center</p>
-                        <h3 className="mt-1 font-serif text-2xl font-bold">Asset Intelligence</h3>
-                      </div>
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/20 text-blue-200">
-                        <LineChart className="h-6 w-6" />
-                      </div>
-                    </div>
-
-                    <div className="mb-5 grid grid-cols-2 gap-4">
-                      {[
-                        [800000, '+ Cr', 'Funding supported (Rs)'],
-                        [180, '+', 'Banking partners'],
-                        [100, '+', 'Offices'],
-                        [800, '+', 'Professionals'],
-                      ].map(([value, suffix, label], index) => (
-                        <motion.div
-                          key={label as string}
-                          className="rounded-2xl border border-white/10 bg-white/[0.07] p-4"
-                          whileHover={{ y: -6, backgroundColor: 'rgba(255,255,255,0.12)' }}
-                          transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-                        >
-                          <div className="font-serif text-2xl font-bold">
-                            <Counter to={value as number} suffix={suffix as string} />
-                          </div>
-                          <div className="mt-1 text-xs text-slate-400">{label}</div>
-                          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
-                            <motion.div
-                              className="h-full rounded-full bg-gradient-to-r from-blue-400 to-cyan-300"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${72 + index * 6}%` }}
-                              transition={{ duration: 1, delay: 0.8 + index * 0.1 }}
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 p-5">
-                      <div className="flex items-start gap-4">
-                        <Award className="h-8 w-8 shrink-0" />
-                        <div>
-                          <h4 className="font-bold">ISO 9001:2015 certified delivery</h4>
-                          <p className="mt-1 text-sm text-blue-50">
-                            Structured inspections, transparent reporting, and specialist review for high-stakes decisions.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            </motion.div>
+              <div className="mt-8 flex items-center gap-2">
+                {heroPhotos.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    aria-label={`Show hero image ${index + 1}`}
+                    onClick={() => setActiveHeroPhoto(index)}
+                    className={`h-2 rounded-full transition-all ${
+                      activeHeroPhoto === index ? 'w-8 bg-blue-600' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                    }`}
+                  />
+                ))}
+              </div>
           </div>
         </div>
-
-        {/* Client marquee */}
-        <div className="relative z-10 border-t border-white/10 py-6">
-          <Marquee items={clientNames} />
-        </div>
       </section>
+
+      <ScrollMarquee items={clientNames} />
 
       {/* Trust strip */}
       <section className="border-b border-slate-200 bg-white">
@@ -205,6 +185,58 @@ export default function Home() {
                 {item}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Brand motion */}
+      <section className="relative overflow-hidden bg-slate-950 py-24 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,197,94,0.18),transparent_32%),radial-gradient(circle_at_85%_25%,rgba(124,58,237,0.22),transparent_34%)]" />
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+            <Reveal>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Brand in motion</span>
+              <h2 className="mb-5 mt-3 font-serif text-3xl font-bold md:text-5xl">
+                A stronger identity for a technology-led valuation firm.
+              </h2>
+              <p className="text-lg leading-relaxed text-slate-300">
+                The Formulaic logo now appears across the site with animated brand moments that feel polished without slowing down the core experience.
+              </p>
+            </Reveal>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {[
+                { src: brandAssets.finalCompositionVideo, label: 'Signature logo reveal' },
+                { src: brandAssets.renderVideo, label: 'Digital motion mark' },
+              ].map((video, index) => (
+                <Reveal key={video.label} delay={index * 0.08}>
+                  <motion.div
+                    className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-3 shadow-2xl shadow-black/25 backdrop-blur"
+                    whileHover={{ y: -8, scale: 1.01 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+                  >
+                    <div className="overflow-hidden rounded-[1.45rem] bg-black">
+                      <video
+                        src={video.src}
+                        className="aspect-video w-full object-cover opacity-95 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        aria-label={video.label}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between px-3 py-4">
+                      <p className="text-sm font-semibold text-slate-100">{video.label}</p>
+                      <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-200">
+                        Formulaic
+                      </span>
+                    </div>
+                  </motion.div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -397,9 +429,9 @@ export default function Home() {
                   <Award className="h-10 w-10 text-blue-600" />
                   <div>
                     <div className="text-2xl font-bold text-slate-900">
-                      <Counter to={100} suffix="+" />
+                      <Counter to={officeLocationCount} />
                     </div>
-                    <div className="text-sm font-medium text-slate-500">Offices PAN India</div>
+                    <div className="text-sm font-medium text-slate-500">Mapped office locations</div>
                   </div>
                 </div>
               </motion.div>

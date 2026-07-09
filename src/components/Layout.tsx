@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { services, sectors } from '../data/site';
+import { brandAssets } from '../data/brandAssets';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,6 +30,7 @@ const navItems: NavItem[] = [
       { name: 'About Us', path: '/about' },
       { name: 'Our Team', path: '/team' },
       { name: 'Our Network', path: '/network' },
+      { name: 'Office Locations', path: '/offices' },
       { name: 'Technology', path: '/technology' },
       { name: 'Accreditations', path: '/accreditations' },
       { name: 'Careers', path: '/careers' },
@@ -95,18 +97,6 @@ export default function Layout() {
         style={{ scaleX: progress }}
       />
 
-      {/* Top Bar */}
-      <div className="relative z-50 hidden items-center justify-between bg-slate-900 px-6 py-2 text-xs text-slate-300 md:flex">
-        <div className="flex space-x-6">
-          <span className="flex items-center"><Phone className="mr-2 h-3 w-3" /> +91 8800723676</span>
-          <span className="flex items-center"><Mail className="mr-2 h-3 w-3" /> valuations@formulaic.in</span>
-        </div>
-        <div className="flex space-x-4">
-          <span>ISO 9001:2015 Certified</span>
-          <span>Best Valuation Agency in India</span>
-        </div>
-      </div>
-
       {/* Main Navigation */}
       <header
         className={cn(
@@ -116,8 +106,8 @@ export default function Layout() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           <Link to="/" className="group flex items-center space-x-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 font-serif text-xl font-bold text-white transition-transform group-hover:scale-105">
-              FE
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white p-1 shadow-sm ring-1 ring-slate-200 transition-transform group-hover:scale-105">
+              <img src={brandAssets.logoMark} alt="Formulaic Engineers logo" className="h-full w-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-xl font-bold leading-tight text-slate-900">Formulaic Engineers</span>
@@ -303,8 +293,8 @@ export default function Layout() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
             <Link to="/" className="mb-6 flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 font-serif text-lg font-bold text-white">
-                FE
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white p-1 shadow-sm">
+                <img src={brandAssets.logoMark} alt="Formulaic Engineers logo" className="h-full w-full object-contain" />
               </div>
               <span className="font-serif text-lg font-bold leading-tight text-white">Formulaic Engineers</span>
             </Link>
@@ -321,6 +311,7 @@ export default function Layout() {
                 ['About Us', '/about'],
                 ['Our Team', '/team'],
                 ['Our Network', '/network'],
+                ['Office Locations', '/offices'],
                 ['Technology', '/technology'],
                 ['Accreditations', '/accreditations'],
                 ['Careers', '/careers'],

@@ -1,5 +1,5 @@
 import { animate, motion, useInView, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { useEffect, useRef, type ReactNode, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from 'react';
 
 /** Counts from 0 to `to` when scrolled into view. */
 export function Counter({ to, prefix = '', suffix = '' }: { to: number; prefix?: string; suffix?: string }) {
@@ -63,6 +63,30 @@ export function Marquee({ items, className = '' }: { items: string[]; className?
         ))}
       </div>
     </div>
+  );
+}
+
+/** Bottom ticker that appears only after the user starts scrolling. */
+export function ScrollMarquee({ items, threshold = 48 }: { items: string[]; threshold?: number }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [threshold]);
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 border-t border-blue-500/30 bg-slate-950/95 py-4 shadow-[0_-12px_40px_rgba(15,23,42,0.35)] backdrop-blur-md"
+      initial={false}
+      animate={{ y: visible ? 0 : '100%' }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      aria-hidden={!visible}
+    >
+      <Marquee items={items} />
+    </motion.div>
   );
 }
 

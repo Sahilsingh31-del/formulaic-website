@@ -13,6 +13,7 @@ import Insights from './pages/Insights';
 import Team from './pages/Team';
 import Careers from './pages/Careers';
 import Network from './pages/Network';
+import Offices from './pages/Offices';
 import Technology from './pages/Technology';
 import Accreditations from './pages/Accreditations';
 import FAQ from './pages/FAQ';
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="team" element={<Team />} />
           <Route path="careers" element={<Careers />} />
           <Route path="network" element={<Network />} />
+          <Route path="offices" element={<Offices />} />
           <Route path="technology" element={<Technology />} />
           <Route path="accreditations" element={<Accreditations />} />
           <Route path="services" element={<Services />} />

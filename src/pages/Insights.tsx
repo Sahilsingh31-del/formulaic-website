@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building2, Factory, Landmark, LineChart, ShieldCheck, TrendingUp } from 'lucide-react';
+import { officeLocations } from '../data/offices';
 
 export default function Insights() {
   const insights = [
@@ -27,7 +28,7 @@ export default function Insights() {
   const metrics = [
     ['180+', 'Leading financial institutions served'],
     ['80+', 'Named banking and corporate partners'],
-    ['100+', 'Offices across India'],
+    [`${officeLocations.length}`, 'Mapped office locations'],
     ['800+', 'Professionals in the network'],
   ];
 

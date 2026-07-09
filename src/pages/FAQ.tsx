@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Minus, Plus } from 'lucide-react';
 import { PageHero, Reveal } from '../components/animated';
+import { officeLocations } from '../data/offices';
+
+const officeLocationCount = officeLocations.length;
+const mappedStatesCount = new Set(officeLocations.map((office) => office.state)).size;
 
 const faqs = [
   {
@@ -19,7 +23,7 @@ const faqs = [
   },
   {
     q: 'Do you cover my city?',
-    a: 'With 100+ offices across 17+ states and a satellite office model, we cover almost all major and Tier-2/3 cities in India. Share your location and we will confirm mobilisation timelines.',
+    a: `With ${officeLocationCount} mapped office locations across ${mappedStatesCount} states and a satellite office model, we cover major and Tier-2/3 cities across the network. Share your location and we will confirm mobilisation timelines.`,
   },
   {
     q: 'Can you handle high-volume retail portfolios?',

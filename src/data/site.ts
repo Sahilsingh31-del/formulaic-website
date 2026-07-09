@@ -13,6 +13,9 @@ import {
   TrainFront,
   type LucideIcon,
 } from 'lucide-react';
+import { officeLocations } from './offices';
+
+const officeLocationCount = officeLocations.length;
 
 export interface ServiceData {
   slug: string;
@@ -47,7 +50,7 @@ export const services: ServiceData[] = [
     stats: [
       [800000, '+ Cr', 'Funding supported (Rs)'],
       [180, '+', 'Banks & NBFCs served'],
-      [100, '+', 'Offices PAN India'],
+      [officeLocationCount, '', 'Mapped office locations'],
     ],
   },
   {
@@ -263,7 +266,7 @@ export const sectors: SectorData[] = [
     solutions: ['IBBI and Income Tax registered valuers', 'Government-compliant reporting formats', 'PAN India field teams for large footprints'],
     stats: [
       [17, '+', 'States covered'],
-      [100, '+', 'Offices'],
+      [officeLocationCount, '', 'Mapped offices'],
       [9, '', 'Professional accreditations'],
     ],
   },
