@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Quote, Star } from 'lucide-react';
 import { Marquee, PageHero, Reveal } from '../components/animated';
 import { clientNames } from '../data/site';
+import { TestimonialsColumn } from '../components/ui/testimonials-columns-1';
 
 const testimonials = [
   { name: 'Rajesh Verma', role: 'Zonal Manager', quote: 'Exceptional, detailed, and accurate retail lending valuation services. Their use of technology sets them apart in the industry.' },
@@ -15,6 +16,10 @@ const testimonials = [
   { name: 'Kavita Sharma', role: 'GM — Recovery', quote: 'Distress valuations were defensible, well-documented, and stood up to every internal and external review.' },
   { name: 'Manoj Tiwari', role: 'Project Director', quote: 'Monitoring reports were always on time and caught cost deviations early enough for us to act.' },
 ];
+
+const firstColumn = testimonials.slice(0, 3);
+const secondColumn = testimonials.slice(3, 6);
+const thirdColumn = testimonials.slice(6, 9);
 
 export default function Testimonials() {
   return (
@@ -31,32 +36,10 @@ export default function Testimonials() {
 
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="columns-1 gap-6 md:columns-2 lg:columns-3 [&>div]:mb-6">
-            {testimonials.map((t, index) => (
-              <motion.div
-                key={t.name}
-                className="break-inside-avoid rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (index % 3) * 0.08 }}
-                whileHover={{ y: -6 }}
-              >
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="flex gap-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <Quote className="h-8 w-8 text-blue-100" />
-                </div>
-                <p className="mb-6 leading-relaxed text-slate-700">"{t.quote}"</p>
-                <div className="border-t border-slate-100 pt-4">
-                  <h4 className="font-bold text-slate-900">{t.name}</h4>
-                  <p className="text-sm font-medium text-blue-600">{t.role}</p>
-                </div>
-              </motion.div>
-            ))}
+          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] max-h-[660px] overflow-hidden">
+            <TestimonialsColumn testimonials={firstColumn} duration={18} />
+            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={22} />
+            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={20} />
           </div>
 
           <Reveal className="mt-16 text-center">
