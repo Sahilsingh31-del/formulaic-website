@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Host & Sitemap URL
+Host: https://formulaic-website-beta.vercel.app
+Sitemap: https://formulaic-website-beta.vercel.app/sitemap.xml
