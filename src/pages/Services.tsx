@@ -26,20 +26,20 @@ export default function Services() {
                 transition={{ duration: 0.5 }}
               >
                 <div className="flex flex-col md:flex-row">
-                  <div className="relative flex flex-col justify-center overflow-hidden bg-slate-950 p-8 text-white md:w-1/3 md:p-12">
+                  <div className="relative flex flex-col justify-center overflow-hidden bg-gradient-to-br from-blue-700 to-blue-950 p-8 text-white md:w-1/3 md:p-12">
                     <div className="absolute -bottom-10 -right-10 opacity-10">
                       <service.icon className="h-48 w-48" />
                     </div>
                     <div className="relative z-10">
-                      <service.icon className="mb-6 h-12 w-12 text-blue-400" />
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+                      <service.icon className="mb-6 h-12 w-12 text-blue-200" />
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
                         0{index + 1}
                       </p>
                       <h2 className="mb-4 font-serif text-2xl font-bold md:text-3xl">{service.title}</h2>
-                      <p className="mb-8 text-sm text-slate-400">{service.tagline}</p>
+                      <p className="mb-8 text-sm text-blue-100/80">{service.tagline}</p>
                       <Link
                         to={`/services/${service.slug}`}
-                        className="group inline-flex items-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold transition-colors hover:bg-blue-500"
+                        className="group inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-50"
                       >
                         Full details
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

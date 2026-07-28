@@ -5,6 +5,33 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --color-foreground: #0f172a;
+
+  /* Brand palette: blue -> rich red */
+  --color-blue-50: #fef2f2;
+  --color-blue-100: #fee2e2;
+  --color-blue-200: #fecaca;
+  --color-blue-300: #f87171;
+  --color-blue-400: #ef4444;
+  --color-blue-500: #dc2626;
+  --color-blue-600: #b91c1c;
+  --color-blue-700: #991b1b;
+  --color-blue-800: #7f1d1d;
+  --color-blue-900: #641414;
+  --color-blue-950: #450a0a;
+
+  /* Secondary accent: cyan -> saturated red (for gradients/highlights) */
+  --color-cyan-50: #fef2f2;
+  --color-cyan-100: #fee2e2;
+  --color-cyan-200: #fca5a5;
+  --color-cyan-300: #f87171;
+  --color-cyan-400: #ef4444;
+  --color-cyan-500: #dc2626;
+  --color-cyan-600: #b91c1c;
+
+  /* Dark neutrals: navy slate -> warm charcoal (used mainly for text now) */
+  --color-slate-800: #33302e;
+  --color-slate-900: #24211f;
+  --color-slate-950: #171412;
 }
 
 html {
@@ -16,7 +43,7 @@ body {
 }
 
 ::selection {
-  background: #2563eb;
+  background: #b91c1c;
   color: white;
 }
 
@@ -38,16 +65,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #150b0b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #4a2a2a;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #b91c1c;
 }
 
 .formulaic-office-pin {
@@ -59,8 +86,8 @@ body {
   height: 34px;
   border: 2px solid white;
   border-radius: 50% 50% 50% 0;
-  background: linear-gradient(135deg, #2563eb, #06b6d4);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  box-shadow: 0 12px 30px rgba(185, 28, 28, 0.35);
   transform: rotate(-45deg);
 }
 
@@ -84,7 +111,7 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 999px;
-  background: rgba(6, 182, 212, 0.45);
+  background: rgba(220, 38, 38, 0.45);
   animation: office-pin-pulse 2s ease-out infinite;
 }
 
@@ -119,7 +146,7 @@ body {
 }
 
 .office-popup-header {
-  background: linear-gradient(135deg, #0f172a, #1d4ed8);
+  background: linear-gradient(135deg, #150b0b, #991b1b);
   color: white;
   padding: 14px 16px;
 }
@@ -127,7 +154,7 @@ body {
 .office-popup-header span {
   display: block;
   margin-bottom: 4px;
-  color: #bae6fd;
+  color: #fecaca;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -188,7 +215,7 @@ body {
   justify-content: center;
   margin-top: 14px;
   border-radius: 12px;
-  background: #2563eb;
+  background: #b91c1c;
   padding: 11px 12px;
   color: white !important;
   font-size: 13px;
@@ -198,6 +225,6 @@ body {
 }
 
 .office-popup-link:hover {
-  background: #1d4ed8;
+  background: #991b1b;
   transform: translateY(-1px);
 }

@@ -75,7 +75,7 @@ export default function Testimonials() {
         description="Feedback from the lenders, developers, and plant heads who rely on our work."
       />
 
-      <section className="border-b border-white/10 bg-slate-950 py-8">
+      <section className="border-b border-slate-200 bg-white py-8">
         <Marquee items={clientNames} />
       </section>
 

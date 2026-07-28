@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building2, Factory, Landmark, TrendingUp } from 'lucide-react';
-import { Counter, PageHero, Reveal } from '../components/animated';
+import { Counter, PageHero, Reveal, StatValue } from '../components/animated';
 
 const cases = [
   {
@@ -10,7 +10,7 @@ const cases = [
     title: 'Portfolio valuation for a leading housing finance company',
     problem: 'A 4,000+ property retail portfolio needed consistent revaluation across 12 states within one quarter.',
     result: 'Delivered with geo-tagged evidence, standardised formats, and zero audit exceptions.',
-    metrics: [[4000, '+', 'Properties valued'], [12, '', 'States covered'], [90, ' days', 'Total timeline']],
+    metrics: [[4000, '+', 'Properties valued'], ['PAN India', '', 'PAN India presence'], [90, ' days', 'Total timeline']],
   },
   {
     icon: Building2,
@@ -61,22 +61,22 @@ export default function CaseStudies() {
                 transition={{ duration: 0.55 }}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr]">
-                  <div className="relative overflow-hidden bg-slate-950 p-8 text-white md:p-12">
+                  <div className="relative overflow-hidden bg-gradient-to-br from-blue-700 to-blue-950 p-8 text-white md:p-12">
                     <div className="absolute -bottom-12 -right-12 opacity-10">
                       <item.icon className="h-56 w-56" />
                     </div>
                     <div className="relative z-10">
-                      <span className="mb-6 inline-flex rounded-full bg-blue-500/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+                      <span className="mb-6 inline-flex rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">
                         {item.sector}
                       </span>
                       <h2 className="mb-8 font-serif text-2xl font-bold leading-snug md:text-3xl">{item.title}</h2>
                       <div className="grid grid-cols-3 gap-4">
                         {item.metrics.map(([value, suffix, label]) => (
                           <div key={label as string}>
-                            <div className="font-serif text-2xl font-bold text-cyan-300 md:text-3xl">
-                              <Counter to={value as number} suffix={suffix as string} />
+                            <div className="font-serif text-2xl font-bold text-blue-200 md:text-3xl">
+                              <StatValue value={value as number | string} suffix={suffix as string} />
                             </div>
-                            <div className="mt-1 text-xs text-slate-400">{label}</div>
+                            <div className="mt-1 text-xs text-blue-100/70">{label}</div>
                           </div>
                         ))}
                       </div>

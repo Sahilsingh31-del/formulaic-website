@@ -21,6 +21,21 @@ export function Counter({ to, prefix = '', suffix = '' }: { to: number; prefix?:
   return <span ref={ref}>{prefix}0{suffix}</span>;
 }
 
+/** Renders a numeric counter or a fixed text stat such as "PAN India". */
+export function StatValue({
+  value,
+  suffix = '',
+}: {
+  value: number | string;
+  suffix?: string;
+}) {
+  if (typeof value === 'string') {
+    return <span>{`${value}${suffix}`}</span>;
+  }
+
+  return <Counter to={value} suffix={suffix} />;
+}
+
 /** Fade-and-rise reveal on scroll. */
 export function Reveal({
   children,
@@ -56,7 +71,7 @@ export function Marquee({ items, className = '' }: { items: string[]; className?
         {doubled.map((item, i) => (
           <div
             key={`${item}-${i}`}
-            className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-300 backdrop-blur"
+            className="whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-6 py-3 text-sm font-semibold text-slate-600 backdrop-blur"
           >
             {item}
           </div>
@@ -79,7 +94,7 @@ export function ScrollMarquee({ items, threshold = 48 }: { items: string[]; thre
 
   return (
     <motion.div
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 border-t border-blue-500/30 bg-slate-950/95 py-4 shadow-[0_-12px_40px_rgba(15,23,42,0.35)] backdrop-blur-md"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 py-4 shadow-[0_-12px_40px_rgba(15,23,42,0.08)] backdrop-blur-md"
       initial={false}
       animate={{ y: visible ? 0 : '100%' }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -123,7 +138,7 @@ export function TiltCard({ children, className = '' }: { children: ReactNode; cl
   );
 }
 
-/** Consistent dark page header with animated glow blobs. */
+/** Consistent light page header with soft red glow accents. */
 export function PageHero({
   eyebrow,
   title,
@@ -138,29 +153,29 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-slate-950 py-20 text-white md:py-28">
+    <section className="relative overflow-hidden border-b border-slate-200 bg-white py-20 md:py-28">
       {image && (
-        <div className="absolute inset-0 opacity-25">
+        <div className="absolute inset-0">
           <img src={image} alt="" className="h-full w-full object-cover" referrerPolicy="no-referrer" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70" />
         </div>
       )}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(37,99,235,0.3),transparent_32%),radial-gradient(circle_at_85%_20%,rgba(34,211,238,0.15),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(185,28,28,0.07),transparent_32%),radial-gradient(circle_at_85%_20%,rgba(239,68,68,0.05),transparent_30%)]" />
       <motion.div
-        className="absolute -top-20 right-1/4 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl"
+        className="absolute -top-20 right-1/4 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"
         animate={{ x: [0, 40, -20, 0], y: [0, 20, -10, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.span
-          className="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200"
+          className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
         >
           {eyebrow}
         </motion.span>
         <motion.h1
-          className="mt-6 mb-6 max-w-3xl font-serif text-4xl font-bold md:text-6xl"
+          className="mt-6 mb-6 max-w-3xl font-serif text-4xl font-bold text-slate-900 md:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -169,7 +184,7 @@ export function PageHero({
         </motion.h1>
         {description && (
           <motion.p
-            className="max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl"
+            className="max-w-2xl text-lg leading-relaxed text-slate-600 md:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}

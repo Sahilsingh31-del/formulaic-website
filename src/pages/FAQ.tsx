@@ -6,7 +6,6 @@ import { PageHero, Reveal } from '../components/animated';
 import { officeLocations } from '../data/offices';
 
 const officeLocationCount = officeLocations.length;
-const mappedStatesCount = new Set(officeLocations.map((office) => office.state)).size;
 
 const faqs = [
   {
@@ -23,7 +22,7 @@ const faqs = [
   },
   {
     q: 'Do you cover my city?',
-    a: `With ${officeLocationCount} mapped office locations across ${mappedStatesCount} states and a satellite office model, we cover major and Tier-2/3 cities across the network. Share your location and we will confirm mobilisation timelines.`,
+    a: `With ${officeLocationCount} mapped office locations and PAN India presence through a satellite office model, we cover major and Tier-2/3 cities across the network. Share your location and we will confirm mobilisation timelines.`,
   },
   {
     q: 'Can you handle high-volume retail portfolios?',
@@ -97,12 +96,12 @@ export default function FAQ() {
             })}
           </div>
 
-          <Reveal className="mt-14 rounded-3xl bg-slate-950 p-8 text-center text-white md:p-12">
+          <Reveal className="mt-14 rounded-3xl bg-gradient-to-br from-blue-700 to-blue-950 p-8 text-center text-white md:p-12">
             <h2 className="mb-3 font-serif text-2xl font-bold md:text-3xl">Still have a question?</h2>
-            <p className="mb-7 text-slate-300">Our team responds within one business day.</p>
+            <p className="mb-7 text-blue-100/90">Our team responds within one business day.</p>
             <Link
               to="/contact"
-              className="group inline-flex items-center rounded-full bg-blue-600 px-8 py-4 font-semibold transition-colors hover:bg-blue-500"
+              className="group inline-flex items-center rounded-full bg-white px-8 py-4 font-semibold text-blue-700 transition-colors hover:bg-blue-50"
             >
               Ask us directly <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>

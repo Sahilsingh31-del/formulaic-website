@@ -26,7 +26,7 @@ export interface ServiceData {
   image: string;
   highlights: string[];
   deliverables: string[];
-  stats: [number, string, string][]; // [value, suffix, label]
+  stats: [number | string, string, string][]; // [value or text, suffix, label]
 }
 
 export const services: ServiceData[] = [
@@ -95,7 +95,7 @@ export const services: ServiceData[] = [
     deliverables: ['Inspection certificates', 'Photographic evidence packs', 'Deviation reports', 'Compliance summaries'],
     stats: [
       [10000, '+', 'Inspections completed'],
-      [17, '+', 'States covered'],
+      ['PAN India', '', 'PAN India presence'],
       [48, 'hr', 'Typical turnaround'],
     ],
   },
@@ -202,7 +202,7 @@ export interface SectorData {
   image: string;
   challenges: string[];
   solutions: string[];
-  stats: [number, string, string][];
+  stats: [number | string, string, string][];
 }
 
 export const sectors: SectorData[] = [
@@ -265,7 +265,7 @@ export const sectors: SectorData[] = [
     challenges: ['Long-life assets with regulated returns', 'Multi-stakeholder approvals', 'Statutory valuation frameworks'],
     solutions: ['IBBI and Income Tax registered valuers', 'Government-compliant reporting formats', 'PAN India field teams for large footprints'],
     stats: [
-      [17, '+', 'States covered'],
+      ['PAN India', '', 'PAN India presence'],
       [officeLocationCount, '', 'Mapped offices'],
       [9, '', 'Professional accreditations'],
     ],

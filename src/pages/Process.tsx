@@ -33,18 +33,18 @@ export default function Process() {
 
   return (
     <div className="flex flex-col w-full bg-slate-50">
-      <section className="relative overflow-hidden bg-slate-950 text-white py-20 md:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(37,99,235,0.35),transparent_32%),radial-gradient(circle_at_85%_20%,rgba(34,211,238,0.18),transparent_30%)]" />
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white py-20 md:py-28">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(185,28,28,0.07),transparent_32%),radial-gradient(circle_at_85%_20%,rgba(239,68,68,0.05),transparent_30%)]" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.span
-            className="inline-flex rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200 border border-white/10"
+            className="inline-flex rounded-full bg-blue-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 border border-blue-100"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Delivery process
           </motion.span>
           <motion.h1
-            className="text-4xl md:text-6xl font-serif font-bold mt-6 mb-6 max-w-3xl"
+            className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mt-6 mb-6 max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -52,7 +52,7 @@ export default function Process() {
             Transparent valuation workflows for high-stakes decisions.
           </motion.h1>
           <motion.p
-            className="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -85,7 +85,7 @@ export default function Process() {
                     <p className="text-slate-600 text-lg leading-relaxed">{step.text}</p>
                   </div>
                   <div className="hidden lg:flex justify-center">
-                    <div className="h-16 w-16 rounded-full bg-slate-950 border-4 border-white shadow-xl text-white flex items-center justify-center font-serif text-xl">
+                    <div className="h-16 w-16 rounded-full bg-blue-700 border-4 border-white shadow-xl text-white flex items-center justify-center font-serif text-xl">
                       {index + 1}
                     </div>
                   </div>

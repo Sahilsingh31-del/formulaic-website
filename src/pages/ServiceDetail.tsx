@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, FileText } from 'lucide-react';
-import { Counter, PageHero, Reveal } from '../components/animated';
+import { PageHero, Reveal, StatValue } from '../components/animated';
 import { services } from '../data/site';
 
 export default function ServiceDetail() {
@@ -30,7 +30,7 @@ export default function ServiceDetail() {
           </Link>
           <Link
             to="/services"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur transition-colors hover:bg-white/20"
+            className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
           >
             All services
           </Link>
@@ -44,7 +44,7 @@ export default function ServiceDetail() {
             {service.stats.map(([value, suffix, label], index) => (
               <Reveal key={label} delay={index * 0.1}>
                 <div className="font-serif text-4xl font-bold md:text-5xl">
-                  <Counter to={value} suffix={suffix} />
+                  <StatValue value={value} suffix={suffix} />
                 </div>
                 <div className="mt-2 text-sm font-medium uppercase tracking-wide text-blue-200">{label}</div>
               </Reveal>
@@ -70,7 +70,7 @@ export default function ServiceDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -8, boxShadow: '0 20px 40px -16px rgba(30,64,175,0.18)' }}
+                whileHover={{ y: -8, boxShadow: '0 20px 40px -16px rgba(127,29,29,0.18)' }}
               >
                 <CheckCircle2 className="mb-5 h-7 w-7 text-blue-600" />
                 <p className="font-medium leading-relaxed text-slate-800">{item}</p>
@@ -98,14 +98,14 @@ export default function ServiceDetail() {
               {service.deliverables.map((item, index) => (
                 <motion.div
                   key={item}
-                  className="flex items-start gap-4 rounded-3xl bg-slate-950 p-6 text-white"
+                  className="flex items-start gap-4 rounded-3xl bg-gradient-to-br from-blue-700 to-blue-950 p-6 text-white"
                   initial={{ opacity: 0, scale: 0.94 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.07 }}
                   whileHover={{ y: -6 }}
                 >
-                  <FileText className="mt-0.5 h-6 w-6 shrink-0 text-cyan-300" />
+                  <FileText className="mt-0.5 h-6 w-6 shrink-0 text-blue-200" />
                   <span className="font-semibold">{item}</span>
                 </motion.div>
               ))}

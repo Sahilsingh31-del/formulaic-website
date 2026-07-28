@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertTriangle, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Counter, PageHero, Reveal } from '../components/animated';
+import { PageHero, Reveal, StatValue } from '../components/animated';
 import { sectors } from '../data/site';
 
 export default function SectorDetail() {
@@ -32,15 +32,15 @@ export default function SectorDetail() {
       </PageHero>
 
       {/* Stats */}
-      <section className="bg-slate-950 py-14 text-white">
+      <section className="border-b border-slate-200 bg-slate-50 py-14">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             {sector.stats.map(([value, suffix, label], index) => (
               <Reveal key={label} delay={index * 0.1}>
-                <div className="bg-gradient-to-r from-blue-300 to-cyan-200 bg-clip-text font-serif text-4xl font-bold text-transparent md:text-5xl">
-                  <Counter to={value} suffix={suffix} />
+                <div className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text font-serif text-4xl font-bold text-transparent md:text-5xl">
+                  <StatValue value={value} suffix={suffix} />
                 </div>
-                <div className="mt-2 text-sm font-medium uppercase tracking-wide text-slate-400">{label}</div>
+                <div className="mt-2 text-sm font-medium uppercase tracking-wide text-slate-500">{label}</div>
               </Reveal>
             ))}
           </div>
@@ -78,17 +78,17 @@ export default function SectorDetail() {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <div className="h-full rounded-3xl bg-slate-950 p-8 text-white">
+              <div className="h-full rounded-3xl bg-gradient-to-br from-blue-700 to-blue-950 p-8 text-white">
                 <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/20 text-cyan-300">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-blue-100">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
                   <h3 className="font-serif text-2xl font-bold">Our response</h3>
                 </div>
                 <ul className="space-y-4">
                   {sector.solutions.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-lg text-slate-300">
-                      <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-cyan-300" />
+                    <li key={item} className="flex items-start gap-3 text-lg text-blue-100/90">
+                      <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-blue-200" />
                       {item}
                     </li>
                   ))}

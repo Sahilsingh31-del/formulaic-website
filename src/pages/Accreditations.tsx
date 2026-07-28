@@ -47,9 +47,9 @@ export default function Accreditations() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-20 text-white">
+      <section className="bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col items-center gap-8 rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 p-8 md:flex-row md:justify-between md:p-12">
+          <div className="flex flex-col items-center gap-8 rounded-[2rem] bg-gradient-to-br from-blue-700 to-blue-950 p-8 text-white md:flex-row md:justify-between md:p-12">
             <div className="flex items-center gap-5">
               <Award className="h-14 w-14 shrink-0" />
               <div>

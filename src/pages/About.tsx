@@ -5,27 +5,27 @@ export default function About() {
   return (
     <div className="flex flex-col w-full">
       {/* Page Header */}
-      <section className="bg-slate-950 text-white py-20 md:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-20">
-          <img 
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
-            alt="Office" 
+      <section className="bg-white border-b border-slate-200 py-20 md:py-28 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+            alt="Office"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-slate-950/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/70"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6"
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             About Us
           </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl text-slate-300 max-w-2xl"
+          <motion.p
+            className="text-lg md:text-xl text-slate-600 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -73,46 +73,46 @@ export default function About() {
       </section>
 
       {/* Infrastructure & Reach */}
-      <section className="py-20 bg-slate-900 text-white">
+      <section className="py-20 border-y border-slate-200 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Infrastructure & Reach</h2>
-            <p className="text-slate-300 text-lg">A robust PAN India presence with modernized facilities and automated platforms.</p>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-6">Infrastructure & Reach</h2>
+            <p className="text-slate-600 text-lg">A robust PAN India presence with modernized facilities and automated platforms.</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <motion.div 
-              className="bg-slate-800/50 p-8 rounded-sm border border-slate-700"
+              className="bg-white p-8 rounded-sm border border-slate-200 shadow-sm"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Map className="w-10 h-10 text-blue-400 mb-6" />
-              <h3 className="text-xl font-bold mb-4">Geographic Reach</h3>
-              <p className="text-slate-400 mb-4">
+              <Map className="w-10 h-10 text-blue-600 mb-6" />
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Geographic Reach</h3>
+              <p className="text-slate-600 mb-4">
                 Network of over 100 offices covering all parts of cities efficiently through strategic satellite offices.
               </p>
               <div className="text-sm text-slate-500">
-                <strong className="text-slate-300 block mb-2">State Presence:</strong>
+                <strong className="text-slate-700 block mb-2">PAN India Presence:</strong>
                 Maharashtra, New Delhi & NCR, Jharkand & Chattisgarh, Andhra Pradesh & Telengana, Gujarat, Bihar, Uttar Pradesh, West Bengal, Punjab, Haryana, Uttarakhand, Rajasthan, Odisha, Karnataka, Madhya Pradesh, Tamil Nadu, and Himachal Pradesh.
               </div>
             </motion.div>
 
             <motion.div 
-              className="bg-slate-800/50 p-8 rounded-sm border border-slate-700"
+              className="bg-white p-8 rounded-sm border border-slate-200 shadow-sm"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div className="w-10 h-10 mb-6 flex items-center justify-center">
-                <svg className="w-10 h-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-10 h-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Technology</h3>
-              <ul className="space-y-3 text-slate-400">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Technology</h3>
+              <ul className="space-y-3 text-slate-600">
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 text-blue-500 mr-3 shrink-0 mt-0.5" />
                   <span>Fully automated working platform with modernized facilities.</span>
@@ -129,15 +129,15 @@ export default function About() {
             </motion.div>
 
             <motion.div 
-              className="bg-slate-800/50 p-8 rounded-sm border border-slate-700"
+              className="bg-white p-8 rounded-sm border border-slate-200 shadow-sm"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Award className="w-10 h-10 text-blue-400 mb-6" />
-              <h3 className="text-xl font-bold mb-4">Professional Standards</h3>
-              <ul className="space-y-3 text-slate-400">
+              <Award className="w-10 h-10 text-blue-600 mb-6" />
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Professional Standards</h3>
+              <ul className="space-y-3 text-slate-600">
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 text-blue-500 mr-3 shrink-0 mt-0.5" />
                   <span>Teams include registered senior Valuers ensuring statutory compliance.</span>

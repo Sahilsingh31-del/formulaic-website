@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building, MapPin } from 'lucide-react';
-import { Counter, PageHero, Reveal } from '../components/animated';
+import { PageHero, Reveal, StatValue } from '../components/animated';
 import { officeLocations } from '../data/offices';
 
 const states = [
@@ -18,13 +18,12 @@ const offices = [
 
 export default function Network() {
   const officeLocationCount = officeLocations.length;
-  const mappedStatesCount = new Set(officeLocations.map((office) => office.state)).size;
 
   return (
     <div className="flex w-full flex-col bg-white">
       <PageHero
         eyebrow="PAN India network"
-        title={`${officeLocationCount} mapped offices. ${mappedStatesCount} states. One standard.`}
+        title={`${officeLocationCount} mapped offices. PAN India presence. One standard.`}
         description="Strategic satellite offices cover all parts of major cities efficiently, connected by high-speed networks and shared digital platforms."
         image="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2044&auto=format&fit=crop"
       />
@@ -34,13 +33,13 @@ export default function Network() {
           <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
             {[
               [officeLocationCount, '', 'Mapped offices'],
-              [mappedStatesCount, '', 'Mapped states'],
+              ['PAN India', '', 'PAN India presence'],
               [800, '+', 'Professionals'],
               [officeLocationCount, '', 'Major cities'],
             ].map(([value, suffix, label], index) => (
               <Reveal key={label as string} delay={index * 0.08}>
                 <div className="font-serif text-4xl font-bold md:text-5xl">
-                  <Counter to={value as number} suffix={suffix as string} />
+                  <StatValue value={value as number | string} suffix={suffix as string} />
                 </div>
                 <div className="mt-2 text-sm uppercase tracking-wide text-blue-200">{label}</div>
               </Reveal>
@@ -82,23 +81,23 @@ export default function Network() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-24 text-white">
+      <section className="border-y border-slate-200 bg-slate-50 py-24">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-14 max-w-2xl text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">State presence</span>
-            <h2 className="mt-3 font-serif text-3xl font-bold md:text-5xl">Active across India</h2>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">PAN India presence</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">Active across India</h2>
           </Reveal>
 
           <div className="flex flex-wrap justify-center gap-3">
             {states.map((state, index) => (
               <motion.span
                 key={state}
-                className="rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-slate-200 backdrop-blur"
+                className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm"
                 initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.03 }}
-                whileHover={{ scale: 1.08, backgroundColor: 'rgba(37,99,235,0.25)' }}
+                whileHover={{ scale: 1.08, backgroundColor: 'rgba(254,226,226,1)' }}
               >
                 {state}
               </motion.span>

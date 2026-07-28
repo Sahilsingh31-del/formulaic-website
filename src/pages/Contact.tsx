@@ -5,18 +5,18 @@ export default function Contact() {
   return (
     <div className="flex flex-col w-full bg-slate-50">
       {/* Header */}
-      <section className="bg-slate-900 text-white py-20">
+      <section className="bg-white border-b border-slate-200 py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6"
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             Contact Us
           </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto"
+          <motion.p
+            className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}

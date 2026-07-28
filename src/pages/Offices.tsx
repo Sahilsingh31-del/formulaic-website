@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { AnimatePresence, motion } from 'motion/react';
 import { Building2, ExternalLink, MapPin, Search, ShieldCheck } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Counter, PageHero, Reveal } from '../components/animated';
+import { Counter, PageHero, Reveal, StatValue } from '../components/animated';
 import { officeLocations, type OfficeLocation } from '../data/offices';
 
 const INDIA_BOUNDS: L.LatLngBoundsExpression = [
@@ -140,7 +140,7 @@ function OfficeMap({ offices, selectedOfficeName }: { offices: OfficeLocation[];
     setTimeout(() => map.invalidateSize(), 80);
   }, [offices, selectedOfficeName]);
 
-  return <div ref={containerRef} className="h-[620px] w-full overflow-hidden rounded-[2rem] border border-white/20 shadow-2xl shadow-slate-950/20" />;
+  return <div ref={containerRef} className="h-[620px] w-full overflow-hidden rounded-[2rem] border border-slate-200 shadow-xl shadow-slate-900/10" />;
 }
 
 export default function Offices() {
@@ -160,8 +160,6 @@ export default function Offices() {
     ? officeLocations.filter((office) => office.name === selectedOfficeName)
     : filteredOffices;
 
-  const statesCount = new Set(officeLocations.map((office) => office.state)).size;
-
   return (
     <div className="flex w-full flex-col bg-white">
       <PageHero
@@ -173,35 +171,35 @@ export default function Offices() {
         <div className="mt-10 grid max-w-3xl grid-cols-3 gap-4">
           {[
             [officeLocations.length, '+', 'Office locations'],
-            [statesCount, '', 'States covered'],
+            ['PAN India', '', 'PAN India presence'],
             [1, '', 'India-only map view'],
           ].map(([value, suffix, label], index) => (
             <motion.div
               key={label as string}
-              className="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur"
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 + index * 0.08 }}
             >
-              <div className="font-serif text-3xl font-bold text-white">
-                <Counter to={value as number} suffix={suffix as string} />
+              <div className="font-serif text-3xl font-bold text-slate-900">
+                <StatValue value={value as number | string} suffix={suffix as string} />
               </div>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-200">{label}</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">{label}</p>
             </motion.div>
           ))}
         </div>
       </PageHero>
 
-      <section className="relative overflow-hidden bg-slate-950 py-8 text-white md:py-12">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(37,99,235,0.25),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(34,211,238,0.14),transparent_30%)]" />
+      <section className="relative overflow-hidden bg-slate-50 py-8 md:py-12">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(185,28,28,0.05),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(239,68,68,0.04),transparent_30%)]" />
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-6 px-6 lg:grid-cols-[360px_1fr]">
-          <Reveal className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-5 shadow-2xl shadow-black/20 backdrop-blur-xl md:p-6">
+          <Reveal className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/5 md:p-6">
             <div className="mb-5 flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">Search office</p>
-                <h2 className="mt-2 font-serif text-2xl font-bold">Office directory</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Search office</p>
+                <h2 className="mt-2 font-serif text-2xl font-bold text-slate-900">Office directory</h2>
               </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/20 text-cyan-200">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
                 <Search className="h-5 w-5" />
               </div>
             </div>
@@ -217,17 +215,17 @@ export default function Offices() {
                   setSelectedOfficeName(undefined);
                 }}
                 placeholder="Type city, state or office name..."
-                className="w-full rounded-2xl border border-white/10 bg-white px-11 py-3 text-sm font-medium text-slate-900 outline-none ring-0 transition focus:border-cyan-300 focus:shadow-lg focus:shadow-cyan-500/20"
+                className="w-full rounded-2xl border border-slate-200 bg-white px-11 py-3 text-sm font-medium text-slate-900 outline-none ring-0 transition focus:border-blue-400 focus:shadow-lg focus:shadow-blue-500/10"
               />
             </div>
 
-            <div className="mt-4 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+            <div className="mt-4 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
               <span>Showing {visibleOffices.length} of {officeLocations.length}</span>
               {selectedOfficeName && (
                 <button
                   type="button"
                   onClick={() => setSelectedOfficeName(undefined)}
-                  className="text-cyan-200 transition hover:text-white"
+                  className="text-blue-600 transition hover:text-blue-700"
                 >
                   Show all
                 </button>
@@ -244,8 +242,8 @@ export default function Offices() {
                       type="button"
                       className={`group w-full rounded-2xl border p-4 text-left transition ${
                         isActive
-                          ? 'border-cyan-300 bg-cyan-300/15'
-                          : 'border-white/10 bg-white/[0.06] hover:border-cyan-300/60 hover:bg-white/[0.1]'
+                          ? 'border-blue-400 bg-blue-50'
+                          : 'border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50/50'
                       }`}
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -256,12 +254,12 @@ export default function Offices() {
                       }}
                     >
                       <div className="flex items-start gap-3">
-                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-500/20 text-cyan-200">
+                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                           <MapPin className="h-4 w-4" />
                         </span>
                         <span>
-                          <span className="block font-semibold text-white">{office.name}</span>
-                          <span className="mt-1 block text-sm text-slate-300">{office.city}, {office.state}</span>
+                          <span className="block font-semibold text-slate-900">{office.name}</span>
+                          <span className="mt-1 block text-sm text-slate-500">{office.city}, {office.state}</span>
                         </span>
                       </div>
                     </motion.button>

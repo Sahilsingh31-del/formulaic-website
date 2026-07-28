@@ -82,7 +82,7 @@ export default function Home() {
           ))}
           {/* Left: readable text zone. Right: photos stay sharp and visible */}
           <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(248,250,252,0.94)_0%,rgba(248,250,252,0.72)_38%,rgba(255,255,255,0.28)_62%,rgba(255,255,255,0.08)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_40%,rgba(37,99,235,0.08),transparent_42%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_40%,rgba(127,29,29,0.08),transparent_42%)]" />
         </div>
 
         {/* Cursor-following glow */}
@@ -190,16 +190,16 @@ export default function Home() {
       </section>
 
       {/* Brand motion */}
-      <section className="relative overflow-hidden bg-slate-950 py-24 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,197,94,0.18),transparent_32%),radial-gradient(circle_at_85%_25%,rgba(124,58,237,0.22),transparent_34%)]" />
+      <section className="relative overflow-hidden border-y border-slate-200 bg-slate-50 py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(239,68,68,0.06),transparent_32%),radial-gradient(circle_at_85%_25%,rgba(185,28,28,0.05),transparent_34%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
             <Reveal>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Brand in motion</span>
-              <h2 className="mb-5 mt-3 font-serif text-3xl font-bold md:text-5xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Brand in motion</span>
+              <h2 className="mb-5 mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">
                 A stronger identity for a technology-led valuation firm.
               </h2>
-              <p className="text-lg leading-relaxed text-slate-300">
+              <p className="text-lg leading-relaxed text-slate-600">
                 The Formulaic logo now appears across the site with animated brand moments that feel polished without slowing down the core experience.
               </p>
             </Reveal>
@@ -211,7 +211,7 @@ export default function Home() {
               ].map((video, index) => (
                 <Reveal key={video.label} delay={index * 0.08}>
                   <motion.div
-                    className="group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-3 shadow-2xl shadow-black/25 backdrop-blur"
+                    className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-3 shadow-xl shadow-slate-900/5"
                     whileHover={{ y: -8, scale: 1.01 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                   >
@@ -228,8 +228,8 @@ export default function Home() {
                       />
                     </div>
                     <div className="flex items-center justify-between px-3 py-4">
-                      <p className="text-sm font-semibold text-slate-100">{video.label}</p>
-                      <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-200">
+                      <p className="text-sm font-semibold text-slate-800">{video.label}</p>
+                      <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">
                         Formulaic
                       </span>
                     </div>
@@ -304,19 +304,19 @@ export default function Home() {
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.label}
-                className="relative overflow-hidden rounded-3xl bg-slate-950 p-7 text-white"
+                className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 to-blue-950 p-7 text-white"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.1 }}
                 whileHover={{ scale: 1.03 }}
               >
-                <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-blue-500/20 blur-2xl" />
+                <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
                 <div className="relative z-10">
                   <div className="mb-8 text-sm text-blue-200">0{index + 1}</div>
-                  <step.icon className="mb-5 h-9 w-9 text-cyan-300" />
+                  <step.icon className="mb-5 h-9 w-9 text-blue-200" />
                   <h3 className="mb-3 font-serif text-2xl font-bold">{step.label}</h3>
-                  <p className="text-slate-300">{step.text}</p>
+                  <p className="text-blue-100/90">{step.text}</p>
                 </div>
               </motion.div>
             ))}
@@ -331,20 +331,20 @@ export default function Home() {
       </section>
 
       {/* Sectors */}
-      <section className="relative overflow-hidden bg-slate-900 py-24 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.25),transparent_30%),radial-gradient(circle_at_80%_60%,rgba(34,211,238,0.16),transparent_34%)]" />
+      <section className="relative overflow-hidden bg-white py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(185,28,28,0.05),transparent_30%),radial-gradient(circle_at_80%_60%,rgba(239,68,68,0.04),transparent_34%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.8fr_1.2fr]">
             <Reveal>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Who trusts us</span>
-              <h2 className="mb-6 mt-3 font-serif text-3xl font-bold md:text-5xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Who trusts us</span>
+              <h2 className="mb-6 mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">
                 Specialists for every asset class and stakeholder
               </h2>
-              <p className="mb-8 text-lg leading-relaxed text-slate-300">
+              <p className="mb-8 text-lg leading-relaxed text-slate-600">
                 From retail lending portfolios to large townships and industrial plants, our teams bring domain knowledge
                 and consistent reporting discipline.
               </p>
-              <Link to="/sectors" className="group inline-flex items-center rounded-full bg-white px-7 py-3 font-semibold text-slate-950">
+              <Link to="/sectors" className="group inline-flex items-center rounded-full bg-blue-600 px-7 py-3 font-semibold text-white shadow-sm shadow-blue-600/20 transition-colors hover:bg-blue-700">
                 Explore all sectors <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Reveal>
@@ -361,12 +361,12 @@ export default function Home() {
                 >
                   <Link
                     to={`/sectors/${sector.slug}`}
-                    className="block h-full rounded-3xl border border-white/10 bg-white/[0.06] p-6 backdrop-blur transition-colors hover:bg-white/[0.11]"
+                    className="block h-full rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-colors hover:border-blue-200 hover:bg-blue-50/50"
                   >
-                    <div className="mb-7 flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-500/20">
-                      <sector.icon className="h-5 w-5 text-cyan-300" />
+                    <div className="mb-7 flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50">
+                      <sector.icon className="h-5 w-5 text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-bold">{sector.title}</h3>
+                    <h3 className="text-lg font-bold text-slate-900">{sector.title}</h3>
                   </Link>
                 </motion.div>
               ))}
@@ -441,7 +441,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-slate-950 py-20 text-center text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-blue-950 py-20 text-center text-white">
         <div className="absolute inset-0 z-0 opacity-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)] bg-[length:30px_30px]" />
         </div>
@@ -450,12 +450,12 @@ export default function Home() {
             <h2 className="mb-6 font-serif text-3xl font-bold md:text-5xl">
               Ready to make your next asset decision with confidence?
             </h2>
-            <p className="mb-10 text-lg text-slate-300">
+            <p className="mb-10 text-lg text-blue-100/90">
               Get in touch with our experts to discuss how we can add value to your next project.
             </p>
             <Link
               to="/contact"
-              className="group inline-flex items-center rounded-full bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-600/30 transition-colors hover:bg-blue-500"
+              className="group inline-flex items-center rounded-full bg-white px-8 py-4 font-semibold text-blue-700 shadow-lg shadow-blue-950/30 transition-colors hover:bg-blue-50"
             >
               Contact Our Team
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

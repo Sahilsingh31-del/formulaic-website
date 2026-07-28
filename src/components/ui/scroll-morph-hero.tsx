@@ -109,15 +109,15 @@ function FlipCard({
 
                 {/* Back Face */}
                 <div
-                    className="absolute inset-0 h-full w-full overflow-hidden rounded-2xl shadow-lg bg-slate-950 flex flex-col justify-between p-4 border border-slate-800"
+                    className="absolute inset-0 h-full w-full overflow-hidden rounded-2xl shadow-lg bg-gradient-to-br from-blue-700 to-blue-950 flex flex-col justify-between p-4 border border-blue-800"
                     style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                 >
                     <div className="flex flex-col h-full justify-between text-left">
                         <div>
-                            <p className="text-[9px] font-bold text-blue-400 uppercase tracking-widest leading-tight">{role}</p>
+                            <p className="text-[9px] font-bold text-blue-200 uppercase tracking-widest leading-tight">{role}</p>
                             <h4 className="text-xs font-bold text-white mt-1 font-serif leading-tight">{name}</h4>
                         </div>
-                        <p className="text-[9px] text-slate-400 leading-tight border-t border-slate-800 pt-2 select-none">{credentials}</p>
+                        <p className="text-[9px] text-blue-100/80 leading-tight border-t border-white/15 pt-2 select-none">{credentials}</p>
                     </div>
                 </div>
             </motion.div>

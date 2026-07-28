@@ -110,7 +110,7 @@ export default function Layout() {
               <img src={brandAssets.logoMark} alt="Formulaic Engineers logo" className="h-full w-full object-contain" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-xl font-bold leading-tight text-slate-900">Formulaic Engineers</span>
+              <span className="font-serif text-xl font-bold leading-tight text-blue-600">Formulaic Engineers</span>
               <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">Private Limited</span>
             </div>
           </Link>
@@ -289,14 +289,14 @@ export default function Layout() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 bg-slate-950 py-16 text-slate-400">
+      <footer className="border-t border-slate-200 bg-white py-16 text-slate-500">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
             <Link to="/" className="mb-6 flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white p-1 shadow-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white p-1 shadow-sm ring-1 ring-slate-200">
                 <img src={brandAssets.logoMark} alt="Formulaic Engineers logo" className="h-full w-full object-contain" />
               </div>
-              <span className="font-serif text-lg font-bold leading-tight text-white">Formulaic Engineers</span>
+              <span className="font-serif text-lg font-bold leading-tight text-blue-600">Formulaic Engineers</span>
             </Link>
             <p className="mb-6 text-sm leading-relaxed">
               A premier consultancy institution in India specializing in Valuations, Advisory, Project Management, and
@@ -305,7 +305,7 @@ export default function Layout() {
           </div>
 
           <div>
-            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white">Company</h4>
+            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-slate-900">Company</h4>
             <ul className="space-y-3 text-sm">
               {[
                 ['About Us', '/about'],
@@ -317,7 +317,7 @@ export default function Layout() {
                 ['Careers', '/careers'],
               ].map(([name, path]) => (
                 <li key={path}>
-                  <Link to={path} className="flex items-center transition-colors hover:text-blue-400">
+                  <Link to={path} className="flex items-center transition-colors hover:text-blue-600">
                     <ChevronRight className="mr-2 h-3 w-3" /> {name}
                   </Link>
                 </li>
@@ -326,11 +326,11 @@ export default function Layout() {
           </div>
 
           <div>
-            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white">Services</h4>
+            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-slate-900">Services</h4>
             <ul className="space-y-3 text-sm">
               {services.slice(0, 6).map((service) => (
                 <li key={service.slug}>
-                  <Link to={`/services/${service.slug}`} className="flex items-center transition-colors hover:text-blue-400">
+                  <Link to={`/services/${service.slug}`} className="flex items-center transition-colors hover:text-blue-600">
                     <ChevronRight className="mr-2 h-3 w-3" /> {service.title}
                   </Link>
                 </li>
@@ -339,7 +339,7 @@ export default function Layout() {
           </div>
 
           <div>
-            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white">Resources</h4>
+            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-slate-900">Resources</h4>
             <ul className="space-y-3 text-sm">
               {[
                 ['Our Process', '/process'],
@@ -350,7 +350,7 @@ export default function Layout() {
                 ['Sectors', '/sectors'],
               ].map(([name, path]) => (
                 <li key={path}>
-                  <Link to={path} className="flex items-center transition-colors hover:text-blue-400">
+                  <Link to={path} className="flex items-center transition-colors hover:text-blue-600">
                     <ChevronRight className="mr-2 h-3 w-3" /> {name}
                   </Link>
                 </li>
@@ -359,7 +359,7 @@ export default function Layout() {
           </div>
 
           <div>
-            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white">Contact</h4>
+            <h4 className="mb-6 text-xs font-semibold uppercase tracking-wider text-slate-900">Contact</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start">
                 <MapPin className="mr-3 mt-0.5 h-4 w-4 shrink-0 text-blue-500" />
@@ -376,11 +376,11 @@ export default function Layout() {
             </ul>
           </div>
         </div>
-        <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between border-t border-slate-800 px-6 pt-8 text-xs text-slate-500 md:flex-row">
+        <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between border-t border-slate-200 px-6 pt-8 text-xs text-slate-500 md:flex-row">
           <p>&copy; {new Date().getFullYear()} Formulaic Engineers Private Limited. All rights reserved.</p>
           <div className="mt-4 flex space-x-4 md:mt-0">
-            <Link to="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link to="/terms" className="transition-colors hover:text-white">Terms of Service</Link>
+            <Link to="/privacy" className="transition-colors hover:text-blue-600">Privacy Policy</Link>
+            <Link to="/terms" className="transition-colors hover:text-blue-600">Terms of Service</Link>
           </div>
         </div>
       </footer>

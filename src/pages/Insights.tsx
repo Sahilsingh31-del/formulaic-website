@@ -34,26 +34,26 @@ export default function Insights() {
 
   return (
     <div className="flex flex-col w-full bg-white">
-      <section className="relative bg-slate-950 text-white py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 opacity-25">
+      <section className="relative bg-white border-b border-slate-200 py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
             alt="Analytics dashboard"
             className="h-full w-full object-cover"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-blue-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/75" />
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.span
-            className="inline-flex rounded-full bg-blue-500/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200 border border-blue-300/20"
+            className="inline-flex rounded-full bg-blue-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 border border-blue-100"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Market insights
           </motion.span>
           <motion.h1
-            className="text-4xl md:text-6xl font-serif font-bold mt-6 mb-6 max-w-3xl"
+            className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mt-6 mb-6 max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -61,7 +61,7 @@ export default function Insights() {
             Ideas and signals for valuation-led decisions.
           </motion.h1>
           <motion.p
-            className="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -104,30 +104,30 @@ export default function Insights() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <motion.div
-              className="relative rounded-[2rem] bg-slate-950 p-6 text-white overflow-hidden"
+              className="relative rounded-[2rem] bg-gradient-to-br from-blue-700 to-blue-950 p-6 text-white overflow-hidden"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
+              <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <p className="text-xs uppercase tracking-[0.25em] text-blue-200">Signal dashboard</p>
                     <h2 className="text-3xl font-serif font-bold mt-2">What teams monitor</h2>
                   </div>
-                  <LineChart className="w-10 h-10 text-cyan-300" />
+                  <LineChart className="w-10 h-10 text-blue-200" />
                 </div>
                 <div className="space-y-5">
                   {['Market comparables', 'Location demand', 'Legal and technical status', 'Asset condition'].map((item, index) => (
                     <div key={item}>
                       <div className="flex justify-between text-sm mb-2">
                         <span>{item}</span>
-                        <span className="text-cyan-200">{78 + index * 5}%</span>
+                        <span className="text-blue-200">{78 + index * 5}%</span>
                       </div>
-                      <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                      <div className="h-2 rounded-full bg-white/15 overflow-hidden">
                         <motion.div
-                          className="h-full rounded-full bg-gradient-to-r from-blue-400 to-cyan-300"
+                          className="h-full rounded-full bg-gradient-to-r from-blue-200 to-white"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${78 + index * 5}%` }}
                           viewport={{ once: true }}
@@ -159,9 +159,9 @@ export default function Insights() {
         </div>
       </section>
 
-      <section className="py-20 bg-slate-900 text-white">
+      <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-500 p-8 md:p-12 flex flex-col lg:flex-row gap-8 lg:items-center lg:justify-between">
+          <div className="rounded-[2rem] bg-gradient-to-br from-blue-700 to-blue-950 p-8 md:p-12 text-white flex flex-col lg:flex-row gap-8 lg:items-center lg:justify-between">
             <div>
               <div className="flex items-center gap-3 text-blue-50 mb-4">
                 <TrendingUp className="w-6 h-6" />

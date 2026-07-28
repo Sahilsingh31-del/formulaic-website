@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Award, GraduationCap, ShieldCheck, Users } from 'lucide-react';
-import { Counter, PageHero, Reveal } from '../components/animated';
+import { PageHero, Reveal, StatValue } from '../components/animated';
 import { officeLocations } from '../data/offices';
 
 const values = [
@@ -12,9 +12,79 @@ const values = [
 ];
 
 const suneetBio =
-  'Building Formulaic has never been a solo journey; it is the result of a relentless collective effort. I take immense pride in having assembled a formidable team of over 800 professionals who are the true pillars of this organization. My vision was to create a culture where engineers, valuers, and architects collaborate seamlessly across 100+ offices nationwide. Today, this team is not just a workforce but a unified force of expertise and integrity, driving our success and ensuring that we deliver excellence in every corner of the country.';
+  'Building Formulaic has never been a solo journey; it is the result of a relentless collective effort. I take immense pride in having assembled a formidable team of over 1500 professionals who are the true pillars of this organization. My vision was to create a culture where engineers, valuers, and architects collaborate seamlessly with a PAN India presence. Today, this team is not just a workforce but a unified force of expertise and integrity, driving our success and ensuring that we deliver excellence in every corner of the country.';
+
+const junaidBio =
+  'At Formulaic, our strength lies in combining engineering precision with scalable operational leadership. As CEO, I am committed to aligning our national teams, technology platforms, and quality frameworks so every mandate — from a single property valuation to a portfolio-scale engagement — is delivered with consistency, independence, and speed.';
+
+const prakashBio =
+  'Sound financial stewardship is the backbone of sustainable growth. As CFO, I focus on building robust controls, transparent reporting, and disciplined planning that support Formulaic\'s expansion across India while safeguarding the trust our banking partners and clients place in us.';
+
+type FeaturedLeader = {
+  name: string;
+  role: string;
+  photo: string;
+  bio: string;
+  stats: [string, string][];
+  imagePosition: 'left' | 'right';
+  photoPosition?: string;
+  photoHeight?: string;
+  photoZoom?: number;
+};
+
+const featuredLeaders: FeaturedLeader[] = [
+  {
+    name: 'Suneet Tyagi',
+    role: 'Managing Director',
+    photo: '/team/suneet-tyagi.png',
+    bio: suneetBio,
+    stats: [
+      ['1500+', 'Professionals'],
+      ['PAN India', 'Presence'],
+      ['Unified', 'Expertise and integrity'],
+    ],
+    imagePosition: 'left',
+  },
+  {
+    name: 'Junaid Kanth',
+    role: 'Chief Executive Officer',
+    photo: '/team/junaid-kanth.png',
+    bio: junaidBio,
+    stats: [
+      ['Lead', 'National leadership'],
+      ['PAN', 'India operations'],
+      ['Vision', 'Strategic growth'],
+    ],
+    imagePosition: 'right',
+  },
+  {
+    name: 'Prakash Kumar',
+    role: 'Chief Finance Officer',
+    photo: '/team/prakash.png',
+    bio: prakashBio,
+    stats: [
+      ['CFO', 'Finance leadership'],
+      ['Risk', 'Governance & controls'],
+      ['Growth', 'Sustainable scale'],
+    ],
+    imagePosition: 'left',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+];
 
 const managementTeam = [
+  {
+    name: 'Satish Bogra',
+    role: 'Director',
+    credentials: 'B.Tech Civil, IBBI and Wealth Tax',
+    summary: 'Providing strategic direction and governance across Formulaic\'s national valuation and advisory operations.',
+    photo: '/team/satish-bogra.png',
+    photoPosition: '50% 0%',
+    photoHeight: '128%',
+    photoZoom: 0.9,
+  },
   {
     name: 'Mayank Kaushik',
     role: 'Director',
@@ -30,61 +100,356 @@ const managementTeam = [
     photo: '/team/management-05.png',
   },
   {
-    name: 'Mohit Mahajan',
-    role: 'Vice President',
-    credentials: 'B.Tech Civil, M.Val (Valuation), IOV',
-    summary: 'A specialized expert in asset valuation, dedicated to delivering accurate market assessments through rigorous analysis.',
-    photo: '/team/management-01.png',
-  },
-  {
-    name: 'Zubeer Khan',
-    role: 'Vice President',
-    credentials: 'B.Tech Civil, MBA (RICS)',
-    summary: 'Bridging the gap between core engineering fundamentals and strategic real estate management for optimal asset value.',
-    photo: '/team/management-04.png',
-  },
-  {
-    name: 'Junaid Kanth',
-    role: 'Vice President',
-    credentials: 'B.Tech Civil, M.Tech Civil, IIV, Chartered Engineer, MRICA, DJVF',
-    summary: 'A Chartered Engineer bringing a comprehensive, multidisciplinary technical approach to complex project management.',
-    photo: '/team/management-07.jpg',
-  },
-  {
-    name: 'Sarthak Jain',
-    role: 'Asst. Vice President',
-    credentials: 'B.Tech Civil, MBA (RICS)',
-    summary: 'Expert in real estate economics, ensuring data-driven insights and financial accuracy for complex valuation projects.',
-    photo: '/team/management-03.png',
-  },
-  {
     name: 'Lalit Sharma',
-    role: 'Asst. Vice President',
+    role: 'Associate Director',
     credentials: 'B.Tech Civil, IOV',
     summary: 'Committed to upholding the highest standards of valuation integrity and professional practice in every engagement.',
     photo: '/team/management-09.png',
   },
   {
-    name: 'Akash Sharma',
+    name: 'Zuber Khan',
+    role: 'Associate Director',
+    credentials: 'B.Tech Civil, MBA (RICS)',
+    summary: 'Bridging the gap between core engineering fundamentals and strategic real estate management for optimal asset value.',
+    photo: '/team/management-04.png',
+  },
+  {
+    name: 'Sarthak Jain',
+    role: 'Associate Director',
+    credentials: 'B.Tech Civil, MBA (RICS)',
+    summary: 'Expert in real estate economics, ensuring data-driven insights and financial accuracy for complex valuation projects.',
+    photo: '/team/management-03.png',
+  },
+  {
+    name: 'Mohit Mahajan',
+    role: 'Senior Vice President',
+    credentials: 'B.Tech Civil, M.Val (Valuation), IOV',
+    summary: 'A specialized expert in asset valuation, dedicated to delivering accurate market assessments through rigorous analysis.',
+    photo: '/team/management-01.png',
+  },
+  {
+    name: 'Aakash Sharma',
     role: 'Head Corporate',
     credentials: 'B.Tech Civil',
     summary: 'Spearheading corporate initiatives and client relations with a strong foundation in civil engineering principles.',
     photo: '/team/management-06.jpg',
   },
   {
-    name: 'Aakash Sharma',
-    role: 'Zonal Technical Manager',
-    credentials: 'B.Tech Civil, MBA',
+    name: 'Pankaj Tyagi',
+    role: 'Head Business Development',
+    credentials: 'Business development',
+    summary: 'Driving client growth, lender partnerships, and business development across Punjab and surrounding markets.',
+    photo: '/team/pankaj-tyagi.png',
+    photoPosition: '50% 28%',
+  },
+];
+
+const humanResourceTeam = [
+  {
+    name: 'Khushboo',
+    role: 'Human Resource',
+    credentials: 'People operations',
+    summary: 'Building and nurturing talent pipelines, culture, and people practices across Formulaic\'s nationwide teams.',
+    photo: '/team/khushboo.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Devanshi',
+    role: 'Human Resource',
+    credentials: 'People operations',
+    summary: 'Supporting recruitment, employee engagement, and HR operations across regional offices and field teams.',
+    photo: '/team/devyanshi.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+];
+
+const technicalManagement = [
+  {
+    name: 'Aakash',
+    role: 'Agra',
+    credentials: 'Regional leadership',
     summary: 'Driving technical efficiency and operational consistency to maintain high-quality standards across regional projects.',
     photo: '/team/management-08.jpg',
   },
+  {
+    name: 'Nishu',
+    role: 'Jharkhand',
+    credentials: 'Regional leadership',
+    summary: 'Leading valuation and advisory delivery across Jharkhand with field coordination and client execution.',
+    photo: '/team/nishu.png',
+    photoPosition: '50% 0%',
+    photoHeight: '128%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Alam',
+    role: 'Maharashtra',
+    credentials: 'Regional leadership',
+    summary: 'Driving statewide technical operations, branch coordination, and quality standards across Maharashtra.',
+    photo: '/team/alam.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Rishabh',
+    role: 'Kanpur',
+    credentials: 'Regional leadership',
+    summary: 'Managing Kanpur branch operations, lender mandates, and on-ground valuation execution in Uttar Pradesh.',
+    photo: '/team/rishabh.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Azzruddin',
+    role: 'Kolkata',
+    credentials: 'State operations',
+    summary: 'Heading Kolkata branch delivery with oversight of technical teams, inspections, and client reporting.',
+    photo: '/team/azzruddin.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Sourav',
+    role: 'Bihar',
+    credentials: 'State operations',
+    summary: 'Leading Bihar branch operations and RTM coordination for high-volume valuation and field reporting.',
+    photo: '/team/sourav.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Rajdeep',
+    role: 'Mumbai',
+    credentials: 'Regional leadership',
+    summary: 'Supporting Mumbai RTM operations with technical coordination, field oversight, and delivery quality.',
+    photo: '/team/rajdeep-shukla.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Niranjana',
+    role: 'Tamil Nadu',
+    credentials: 'State operations',
+    summary: 'Leading technical operations and branch coordination across Tamil Nadu with statewide delivery oversight.',
+    photo: '/team/niranjana.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Archit',
+    role: 'Gujarat',
+    credentials: 'Regional technical management',
+    summary: 'Managing Gujarat RTM operations with field team coordination, quality control, and client reporting.',
+    photo: '/team/archit.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Saurabh',
+    role: 'Lucknow',
+    credentials: 'Regional technical management',
+    summary: 'Supporting Lucknow branch operations with technical delivery, field coordination, and valuation execution.',
+    photo: '/team/saurabh.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Bharath',
+    role: 'Karnataka',
+    credentials: 'State operations',
+    summary: 'Leading Karnataka branch operations with oversight of technical teams, field delivery, and client reporting.',
+    photo: '/team/bharath.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Deepak',
+    role: 'Dehradun',
+    credentials: 'Regional technical management',
+    summary: 'Supporting Dehradun technical operations with field coordination, inspections, and on-ground valuation delivery.',
+    photo: '/team/deepak-mittal.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Suraj',
+    role: 'Delhi/NCR',
+    credentials: 'State operations',
+    summary: 'Leading Delhi and NCR branch operations with oversight of technical teams, field delivery, and client reporting.',
+    photo: '/team/suraj-singh.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Anurag',
+    role: 'Madhya Pradesh',
+    credentials: 'Regional technical management',
+    summary: 'Supporting Madhya Pradesh technical operations with field coordination, inspections, and valuation delivery.',
+    photo: '/team/anurag.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Hussain',
+    role: 'Telangana',
+    credentials: 'State operations',
+    summary: 'Heading Telangana branch delivery with oversight of technical teams, inspections, and client reporting.',
+    photo: '/team/hussain.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Manjeet',
+    role: 'Punjab',
+    credentials: 'Regional technical management',
+    summary: 'Leading Punjab operations with oversight of business growth, client delivery, and regional team performance.',
+    photo: '/team/manjeet.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Ravi',
+    role: 'Punjab',
+    credentials: 'Regional technical management',
+    summary: 'Supporting Punjab regional operations and corporate coordination across technical and field teams.',
+    photo: '/team/ravi.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Ankit',
+    role: 'Rajasthan',
+    credentials: 'Regional technical management',
+    summary: 'Managing Rajasthan RTM operations with field team coordination, quality control, and client reporting.',
+    photo: '/team/ankit.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+  {
+    name: 'Animesh',
+    role: 'Rajasthan',
+    credentials: 'Regional technical management',
+    summary: 'Supporting Rajasthan RTM delivery with technical coordination, inspections, and on-ground valuation work.',
+    photo: '/team/animesh.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
 ];
+
+type TeamMember = {
+  name: string;
+  role: string;
+  credentials: string;
+  summary: string;
+  photo: string;
+  photoPosition?: string;
+  photoHeight?: string;
+  photoZoom?: number;
+};
+
+function LeadershipSpotlight({
+  leader,
+  index,
+}: {
+  leader: FeaturedLeader;
+  index: number;
+  key?: string;
+}) {
+  const imageFirst = leader.imagePosition === 'left';
+
+  const image = (
+    <Reveal>
+      <motion.div
+        className="relative mx-auto max-w-md overflow-hidden rounded-[2rem] border border-white bg-white p-3 shadow-2xl shadow-slate-200"
+        whileHover={{ y: -8, rotate: imageFirst ? -1 : 1 }}
+      >
+        <div className="absolute -left-12 -top-12 h-40 w-40 rounded-full bg-blue-500/10 blur-2xl" />
+        <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-cyan-500/10 blur-2xl" />
+        <img
+          src={leader.photo}
+          alt={`${leader.name}, ${leader.role}`}
+          className="relative z-10 h-[520px] w-full rounded-[1.5rem] object-cover"
+          style={
+            leader.photoPosition
+              ? {
+                  objectPosition: leader.photoPosition,
+                  transform: leader.photoZoom ? `scale(${leader.photoZoom})` : undefined,
+                  transformOrigin: leader.photoPosition,
+                }
+              : undefined
+          }
+          loading="lazy"
+        />
+      </motion.div>
+    </Reveal>
+  );
+
+  const content = (
+    <Reveal delay={0.1}>
+      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">{leader.role}</span>
+      <h2 className="mt-3 font-serif text-4xl font-bold text-slate-900 md:text-6xl">{leader.name}</h2>
+      <p className="mt-6 text-lg leading-relaxed text-slate-600">{leader.bio}</p>
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {leader.stats.map(([value, label]) => (
+          <div key={label} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+            <div className="break-words font-serif text-2xl font-bold leading-tight text-slate-900 md:text-3xl">{value}</div>
+            <div className="mt-1 text-[11px] font-semibold uppercase leading-snug tracking-[0.12em] text-slate-500">{label}</div>
+          </div>
+        ))}
+      </div>
+    </Reveal>
+  );
+
+  return (
+    <section className={`relative overflow-hidden py-24 ${index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}`}>
+      {index % 2 === 0 && (
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(127,29,29,0.08),transparent_30%),radial-gradient(circle_at_88%_10%,rgba(220,38,38,0.08),transparent_28%)]" />
+      )}
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+          {imageFirst ? (
+            <>
+              {image}
+              {content}
+            </>
+          ) : (
+            <>
+              {content}
+              {image}
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function ManagementCard({
   member,
   index,
 }: {
-  member: (typeof managementTeam)[number];
+  member: TeamMember;
   index: number;
   key?: string;
 }) {
@@ -101,15 +466,23 @@ function ManagementCard({
         <img
           src={member.photo}
           alt={`${member.name}, ${member.role}`}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          className="w-full object-cover transition duration-500 group-hover:scale-105"
+          style={{
+            height: member.photoHeight ?? '100%',
+            objectPosition: member.photoPosition,
+            transform: member.photoZoom ? `scale(${member.photoZoom})` : undefined,
+            transformOrigin: member.photoPosition ?? 'center',
+          }}
           loading="lazy"
         />
       </div>
       <div className="p-6">
         <div className="mb-4 flex items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">{member.role}</p>
-            <h3 className="mt-1 font-serif text-2xl font-bold text-slate-900">{member.name}</h3>
+            {member.role ? (
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">{member.role}</p>
+            ) : null}
+            <h3 className={`${member.role ? 'mt-1' : ''} font-serif text-2xl font-bold text-slate-900`}>{member.name}</h3>
           </div>
           <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
             {String(index + 1).padStart(2, '0')}
@@ -124,7 +497,6 @@ function ManagementCard({
 
 export default function Team() {
   const officeLocationCount = officeLocations.length;
-  const mappedStatesCount = new Set(officeLocations.map((office) => office.state)).size;
 
   return (
     <div className="flex w-full flex-col bg-white">
@@ -135,65 +507,29 @@ export default function Team() {
         image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
       />
 
-      <section className="bg-slate-950 py-14 text-white">
+      <section className="border-b border-slate-200 bg-slate-50 py-14">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
             {[
-              [800, '+', 'Professionals'],
+              [1500, '+', 'Professionals'],
               [officeLocationCount, '', 'Office locations'],
-              [mappedStatesCount, '', 'Mapped states'],
+              ['PAN India', '', 'PAN India presence'],
               [9, '', 'Accreditations'],
             ].map(([value, suffix, label], index) => (
               <Reveal key={label as string} delay={index * 0.08}>
-                <div className="bg-gradient-to-r from-blue-300 to-cyan-200 bg-clip-text font-serif text-4xl font-bold text-transparent md:text-5xl">
-                  <Counter to={value as number} suffix={suffix as string} />
+                <div className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text font-serif text-4xl font-bold text-transparent md:text-5xl">
+                  <StatValue value={value as number | string} suffix={suffix as string} />
                 </div>
-                <div className="mt-2 text-sm uppercase tracking-wide text-slate-400">{label}</div>
+                <div className="mt-2 text-sm uppercase tracking-wide text-slate-500">{label}</div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-slate-50 py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(37,99,235,0.08),transparent_30%),radial-gradient(circle_at_88%_10%,rgba(34,197,94,0.08),transparent_28%)]" />
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="relative z-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-            <Reveal>
-              <motion.div
-                className="relative mx-auto max-w-md overflow-hidden rounded-[2rem] border border-white bg-white p-3 shadow-2xl shadow-slate-200"
-                whileHover={{ y: -8, rotate: -1 }}
-              >
-                <div className="absolute -left-12 -top-12 h-40 w-40 rounded-full bg-blue-500/10 blur-2xl" />
-                <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-emerald-500/10 blur-2xl" />
-                <img
-                  src="/team/suneet-tyagi.jpg"
-                  alt="Suneet Tyagi, Managing Director"
-                  className="relative z-10 h-[520px] w-full rounded-[1.5rem] object-cover"
-                />
-              </motion.div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Managing Director</span>
-              <h2 className="mt-3 font-serif text-4xl font-bold text-slate-900 md:text-6xl">Suneet Tyagi</h2>
-              <p className="mt-6 text-lg leading-relaxed text-slate-600">{suneetBio}</p>
-              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                {[
-                  ['800+', 'Professionals'],
-                  ['100+', 'Offices nationwide'],
-                  ['Unified', 'Expertise and integrity'],
-                ].map(([value, label]) => (
-                  <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                    <div className="font-serif text-3xl font-bold text-slate-900">{value}</div>
-                    <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{label}</div>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      {featuredLeaders.map((leader, index) => (
+        <LeadershipSpotlight key={leader.name} leader={leader} index={index} />
+      ))}
 
       <section className="bg-white py-24">
         <div className="mx-auto max-w-7xl px-6">
@@ -201,7 +537,7 @@ export default function Team() {
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Management Team</span>
             <h2 className="mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">The team driving execution.</h2>
             <p className="mt-5 text-lg leading-relaxed text-slate-600">
-              Management team members are shown in the same hierarchy as the existing Formulaic Wix page, with their roles, qualifications, and leadership focus.
+              Senior leaders who drive strategy, quality, and delivery across Formulaic&apos;s valuation and advisory practice.
             </p>
           </Reveal>
 
@@ -213,37 +549,37 @@ export default function Team() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-24 text-white">
+      <section className="bg-slate-50 py-24">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-14 max-w-3xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Technical Team</span>
-            <h2 className="mt-3 font-serif text-3xl font-bold md:text-5xl">Field strength, technical depth.</h2>
-            <p className="mt-5 text-lg leading-relaxed text-slate-300">
-              Engineers, valuers, and technical professionals form the execution strength behind high-volume valuation and advisory delivery. Individual technical team photos will be added here as the final profiles are confirmed.
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Human Resource</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">People behind the people.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              Our HR team builds culture, supports talent, and keeps Formulaic&apos;s nationwide workforce connected and growing.
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              ['Valuation specialists', 'Registered valuers, civil engineers, and market analysts supporting property and project valuation mandates.'],
-              ['Inspection teams', 'Field professionals for geo-tagged evidence, construction progress checks, and lender-ready documentation.'],
-              ['Quality reviewers', 'Senior technical reviewers who standardise methodology, compliance checks, and final report quality.'],
-            ].map(([title, text], index) => (
-              <motion.div
-                key={title}
-                className="rounded-3xl border border-white/10 bg-white/[0.06] p-8 shadow-2xl shadow-black/20"
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ delay: index * 0.08 }}
-                whileHover={{ y: -8 }}
-              >
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-300">
-                  <Users className="h-7 w-7" />
-                </div>
-                <h3 className="mb-3 font-serif text-2xl font-bold text-white">{title}</h3>
-                <p className="leading-relaxed text-slate-300">{text}</p>
-              </motion.div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:max-w-4xl">
+            {humanResourceTeam.map((member, index) => (
+              <ManagementCard key={member.name} member={member} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-slate-200 bg-white py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mb-14 max-w-3xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Technical Team</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">Regional leaders on the ground.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              Technical team members who lead execution, field teams, and client delivery across Formulaic&apos;s national network.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {technicalManagement.map((member, index) => (
+              <ManagementCard key={member.name} member={member} index={index} />
             ))}
           </div>
         </div>
@@ -259,16 +595,16 @@ export default function Team() {
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
-                className="rounded-3xl bg-slate-950 p-7 text-white"
+                className="rounded-3xl bg-gradient-to-br from-blue-700 to-blue-950 p-7 text-white"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
                 whileHover={{ scale: 1.04 }}
               >
-                <value.icon className="mb-5 h-8 w-8 text-cyan-300" />
+                <value.icon className="mb-5 h-8 w-8 text-blue-200" />
                 <h3 className="mb-2 text-lg font-bold">{value.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-300">{value.text}</p>
+                <p className="text-sm leading-relaxed text-blue-100/90">{value.text}</p>
               </motion.div>
             ))}
           </div>

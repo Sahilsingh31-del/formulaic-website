@@ -46,13 +46,13 @@ export default function Technology() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-24 text-white">
+      <section className="border-y border-slate-200 bg-slate-50 py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
             <Reveal>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Live pipeline</span>
-              <h2 className="mb-6 mt-3 font-serif text-3xl font-bold md:text-5xl">How an assignment flows through the platform</h2>
-              <p className="text-lg leading-relaxed text-slate-300">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Live pipeline</span>
+              <h2 className="mb-6 mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">How an assignment flows through the platform</h2>
+              <p className="text-lg leading-relaxed text-slate-600">
                 Every stage is timestamped and visible — no email chains, no lost documents, no surprises at review time.
               </p>
             </Reveal>
@@ -61,17 +61,17 @@ export default function Technology() {
               {['Request logged & assigned', 'Field visit scheduled', 'Evidence uploaded from site', 'Analysis & senior review', 'Report delivered & archived'].map((stage, index) => (
                 <motion.div
                   key={stage}
-                  className="flex items-center gap-5 rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur"
+                  className="flex items-center gap-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 8, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                  whileHover={{ x: 8, backgroundColor: 'rgba(254,242,242,1)' }}
                 >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 font-serif text-lg font-bold">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-800 font-serif text-lg font-bold text-white">
                     {index + 1}
                   </div>
-                  <span className="font-semibold">{stage}</span>
+                  <span className="font-semibold text-slate-900">{stage}</span>
                 </motion.div>
               ))}
             </div>

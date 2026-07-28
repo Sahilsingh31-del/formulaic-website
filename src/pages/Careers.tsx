@@ -91,13 +91,13 @@ export default function Careers() {
             ))}
           </div>
 
-          <Reveal className="mt-12 rounded-3xl bg-slate-950 p-8 text-center text-white md:p-12">
+          <Reveal className="mt-12 rounded-3xl bg-gradient-to-br from-blue-700 to-blue-950 p-8 text-center text-white md:p-12">
             <h3 className="mb-3 font-serif text-2xl font-bold md:text-3xl">Don't see your role?</h3>
-            <p className="mb-6 text-slate-300">
-              Send your profile to <span className="font-semibold text-cyan-300">valuations@formulaic.in</span> — we hire
+            <p className="mb-6 text-blue-100/90">
+              Send your profile to <span className="font-semibold text-white">valuations@formulaic.in</span> — we hire
               ahead of openings for strong candidates.
             </p>
-            <Link to="/contact" className="inline-flex items-center rounded-full bg-white px-7 py-3 font-semibold text-slate-950">
+            <Link to="/contact" className="inline-flex items-center rounded-full bg-white px-7 py-3 font-semibold text-blue-700">
               Get in touch
             </Link>
           </Reveal>
