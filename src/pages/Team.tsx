@@ -336,7 +336,8 @@ const technicalManagement = [
     role: 'Regional Head Business Development',
     credentials: 'Business development',
     summary: 'Leading regional business development, institutional lender partnerships, and client growth initiatives across key markets.',
-    photo: '/team/management-07.jpg',
+    photo: '/team/vikrant-sharma.jpg',
+    photoPosition: '50% 12%',
   },
 ];
 
