@@ -171,6 +171,14 @@ const technicalManagement = [
     photo: '/team/management-08.jpg',
   },
   {
+    name: 'Vikrant Sharma',
+    role: 'Business Development - Regional Management',
+    credentials: 'Business development - regional management',
+    summary: 'Leading business development and regional management initiatives, institutional lender partnerships, and client growth.',
+    photo: '/team/vikrant-sharma.jpg',
+    photoPosition: '50% 12%',
+  },
+  {
     name: 'Nishu',
     role: 'Jharkhand',
     credentials: 'Regional leadership',
@@ -330,14 +338,6 @@ const technicalManagement = [
     photoPosition: '50% 0%',
     photoHeight: '125%',
     photoZoom: 0.9,
-  },
-  {
-    name: 'Vikrant Sharma',
-    role: 'Regional Head Business Development',
-    credentials: 'Business development',
-    summary: 'Leading regional business development, institutional lender partnerships, and client growth initiatives across key markets.',
-    photo: '/team/vikrant-sharma.jpg',
-    photoPosition: '50% 12%',
   },
 ];
 
