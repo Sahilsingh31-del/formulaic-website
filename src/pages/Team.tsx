@@ -119,8 +119,10 @@ const financeTeam = [
     role: 'Chief Finance Officer',
     credentials: 'Finance leadership',
     summary: 'Building robust controls, transparent reporting, and disciplined planning that support Formulaic\'s expansion across India while safeguarding trust.',
-    photo: '/team/prakash-kumar.jpg',
-    photoPosition: '50% 10%',
+    photo: '/team/prakash.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
   },
 ];
 
