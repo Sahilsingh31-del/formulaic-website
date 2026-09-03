@@ -84,6 +84,42 @@ export default function Layout() {
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
     window.scrollTo(0, 0);
+
+    // Dynamic SEO Titles per Route
+    const titles: Record<string, string> = {
+      '/': 'Formulaic Engineers | Valuation, Advisory & Inspection Firm',
+      '/about': 'About Us | Formulaic Engineers Private Limited',
+      '/team': 'Leadership & Regional Team | Formulaic Engineers',
+      '/services': 'Valuation & Technical Services | Formulaic Engineers',
+      '/sectors': 'Industry Sectors We Serve | Formulaic Engineers',
+      '/network': 'National Network & PAN India Presence | Formulaic Engineers',
+      '/offices': '100+ Office Locations Across India | Formulaic Engineers',
+      '/technology': 'Proprietary Valuation Technology | Formulaic Engineers',
+      '/accreditations': 'Accreditations & Government Registrations | Formulaic Engineers',
+      '/clients': 'Empanelled Banks & Financial Institutions | Formulaic Engineers',
+      '/process': 'Our Methodologies & Inspection Process | Formulaic Engineers',
+      '/insights': 'Industry Insights, Market Trends & Research | Formulaic Engineers',
+      '/case-studies': 'Valuation Case Studies & Success Stories | Formulaic Engineers',
+      '/testimonials': 'Client Reviews & Testimonials | Formulaic Engineers',
+      '/careers': 'Careers & Opportunities | Join Formulaic Engineers',
+      '/faq': 'Frequently Asked Questions | Formulaic Engineers',
+      '/contact': 'Contact Us | Formulaic Engineers Noida HQ & Pan India',
+    };
+
+    const matchedTitle = titles[location.pathname];
+    if (matchedTitle) {
+      document.title = matchedTitle;
+    } else if (location.pathname.startsWith('/services/')) {
+      const slug = location.pathname.replace('/services/', '');
+      const s = services.find((srv) => srv.slug === slug);
+      document.title = s ? `${s.title} | Formulaic Engineers` : 'Services | Formulaic Engineers';
+    } else if (location.pathname.startsWith('/sectors/')) {
+      const slug = location.pathname.replace('/sectors/', '');
+      const sec = sectors.find((sct) => sct.slug === slug);
+      document.title = sec ? `${sec.title} | Formulaic Engineers` : 'Sectors | Formulaic Engineers';
+    } else {
+      document.title = 'Formulaic Engineers | Valuation, Advisory & Inspection Firm';
+    }
   }, [location.pathname]);
 
   const isGroupActive = (item: NavItem) =>
