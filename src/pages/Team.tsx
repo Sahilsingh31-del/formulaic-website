@@ -1,6 +1,7 @@
-import { motion } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Award, GraduationCap, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight, Award, GraduationCap, ShieldCheck, Users, X } from 'lucide-react';
 import { PageHero, Reveal, StatValue } from '../components/animated';
 import { officeLocations } from '../data/offices';
 
@@ -13,12 +14,6 @@ const values = [
 
 const suneetBio =
   'Building Formulaic has never been a solo journey; it is the result of a relentless collective effort. I take immense pride in having assembled a formidable team of over 1500 professionals who are the true pillars of this organization. My vision was to create a culture where engineers, valuers, and architects collaborate seamlessly with a PAN India presence. Today, this team is not just a workforce but a unified force of expertise and integrity, driving our success and ensuring that we deliver excellence in every corner of the country.';
-
-const junaidBio =
-  'At Formulaic, our strength lies in combining engineering precision with scalable operational leadership. As CEO, I am committed to aligning our national teams, technology platforms, and quality frameworks so every mandate — from a single property valuation to a portfolio-scale engagement — is delivered with consistency, independence, and speed.';
-
-const prakashBio =
-  'Sound financial stewardship is the backbone of sustainable growth. As CFO, I focus on building robust controls, transparent reporting, and disciplined planning that support Formulaic\'s expansion across India while safeguarding the trust our banking partners and clients place in us.';
 
 type FeaturedLeader = {
   name: string;
@@ -45,33 +40,6 @@ const featuredLeaders: FeaturedLeader[] = [
     ],
     imagePosition: 'left',
   },
-  {
-    name: 'Junaid Kanth',
-    role: 'Chief Executive Officer',
-    photo: '/team/junaid-kanth.png',
-    bio: junaidBio,
-    stats: [
-      ['Lead', 'National leadership'],
-      ['PAN', 'India operations'],
-      ['Vision', 'Strategic growth'],
-    ],
-    imagePosition: 'right',
-  },
-  {
-    name: 'Prakash Kumar',
-    role: 'Chief Finance Officer',
-    photo: '/team/prakash.png',
-    bio: prakashBio,
-    stats: [
-      ['CFO', 'Finance leadership'],
-      ['Risk', 'Governance & controls'],
-      ['Growth', 'Sustainable scale'],
-    ],
-    imagePosition: 'left',
-    photoPosition: '50% 0%',
-    photoHeight: '125%',
-    photoZoom: 0.9,
-  },
 ];
 
 const managementTeam = [
@@ -93,11 +61,11 @@ const managementTeam = [
     photo: '/team/management-02.png',
   },
   {
-    name: 'Deepak Swain',
-    role: 'Associate Director',
-    credentials: 'M.Tech Civil, IOV',
-    summary: 'Leveraging advanced technical expertise in civil engineering to ensure precision and reliability in every valuation.',
-    photo: '/team/management-05.png',
+    name: 'Junaid Kanth',
+    role: 'Chief Executive Officer',
+    credentials: 'National leadership',
+    summary: 'Aligning national teams, technology platforms, and quality frameworks to deliver with consistency, independence, and speed.',
+    photo: '/team/junaid-kanth.png',
   },
   {
     name: 'Lalit Sharma',
@@ -141,6 +109,32 @@ const managementTeam = [
     summary: 'Driving client growth, lender partnerships, and business development across Punjab and surrounding markets.',
     photo: '/team/pankaj-tyagi.png',
     photoPosition: '50% 28%',
+  },
+];
+
+const financeTeam = [
+  {
+    name: 'Prakash Kumar',
+    role: 'Chief Finance Officer',
+    credentials: 'Finance leadership',
+    summary: 'Building robust controls, transparent reporting, and disciplined planning that support Formulaic\'s expansion across India while safeguarding trust.',
+    photo: '/team/prakash.png',
+    photoPosition: '50% 0%',
+    photoHeight: '125%',
+    photoZoom: 0.9,
+  },
+];
+
+const legalTeam = [
+  {
+    name: 'Khushboo Monga',
+    role: 'Legal Head',
+    credentials: 'Legal operations',
+    summary: 'Overseeing legal operations, compliance, and risk management for the organization to ensure smooth engagements.',
+    photo: '/team/khushboo-monga.jpg',
+    photoPosition: '50% 15%',
+    photoHeight: '120%',
+    photoZoom: 0.95,
   },
 ];
 
@@ -245,16 +239,7 @@ const technicalManagement = [
     photoHeight: '125%',
     photoZoom: 0.9,
   },
-  {
-    name: 'Archit',
-    role: 'Gujarat',
-    credentials: 'Regional technical management',
-    summary: 'Managing Gujarat RTM operations with field team coordination, quality control, and client reporting.',
-    photo: '/team/archit.png',
-    photoPosition: '50% 0%',
-    photoHeight: '125%',
-    photoZoom: 0.9,
-  },
+
   {
     name: 'Saurabh',
     role: 'Lucknow',
@@ -341,16 +326,6 @@ const technicalManagement = [
     credentials: 'Regional technical management',
     summary: 'Managing Rajasthan RTM operations with field team coordination, quality control, and client reporting.',
     photo: '/team/ankit.png',
-    photoPosition: '50% 0%',
-    photoHeight: '125%',
-    photoZoom: 0.9,
-  },
-  {
-    name: 'Animesh',
-    role: 'Rajasthan',
-    credentials: 'Regional technical management',
-    summary: 'Supporting Rajasthan RTM delivery with technical coordination, inspections, and on-ground valuation work.',
-    photo: '/team/animesh.png',
     photoPosition: '50% 0%',
     photoHeight: '125%',
     photoZoom: 0.9,
@@ -445,57 +420,203 @@ function LeadershipSpotlight({
   );
 }
 
+function MemberModal({
+  member,
+  onClose,
+}: {
+  member: TeamMember | null;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (!member) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [member, onClose]);
+
+  return (
+    <AnimatePresence>
+      {member && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+          />
+
+          {/* Modal Box */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-slate-200 bg-white shadow-2xl p-6 sm:p-8 md:p-10"
+            role="dialog"
+            aria-modal="true"
+          >
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 sm:right-6 sm:top-6 z-20 rounded-full p-2.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+              aria-label="Close modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 md:gap-8 items-start">
+              {/* Photo */}
+              <div className="relative mx-auto md:mx-0 w-full max-w-[240px] aspect-[4/5] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-md">
+                <img
+                  src={member.photo}
+                  alt={`${member.name}, ${member.role}`}
+                  className="h-full w-full object-cover"
+                  style={{
+                    height: member.photoHeight ?? '100%',
+                    objectPosition: member.photoPosition,
+                    transform: member.photoZoom ? `scale(${member.photoZoom})` : undefined,
+                    transformOrigin: member.photoPosition ?? 'center',
+                  }}
+                />
+              </div>
+
+              {/* Info */}
+              <div className="flex flex-col">
+                {member.role ? (
+                  <span className="self-start inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-blue-700 border border-blue-100/60">
+                    {member.role}
+                  </span>
+                ) : null}
+
+                <h3 className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+                  {member.name}
+                </h3>
+
+                {member.credentials ? (
+                  <div className="mt-2.5 flex items-center gap-2 text-sm font-semibold text-slate-500">
+                    <Award className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                    <span>{member.credentials}</span>
+                  </div>
+                ) : null}
+
+                <div className="mt-5 rounded-2xl bg-slate-50 border border-slate-100 p-5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">About &amp; Responsibilities</p>
+                  <p className="text-base leading-relaxed text-slate-700 font-normal">
+                    {member.summary}
+                  </p>
+                </div>
+
+                <div className="mt-6 flex items-center gap-3 text-xs text-slate-400">
+                  <ShieldCheck className="h-4 w-4 text-blue-600" />
+                  <span>Formulaic Engineers Leadership &amp; Operations</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function ManagementCard({
   member,
   index,
+  onSelect,
 }: {
   member: TeamMember;
   index: number;
+  onSelect: () => void;
   key?: string;
 }) {
   return (
     <motion.div
-      className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+      onClick={onSelect}
+      className="group relative flex flex-col justify-between cursor-pointer overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
       initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ delay: index * 0.035 }}
-      whileHover={{ y: -8 }}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
     >
-      <div className="aspect-[4/3] overflow-hidden bg-slate-100">
-        <img
-          src={member.photo}
-          alt={`${member.name}, ${member.role}`}
-          className="w-full object-cover transition duration-500 group-hover:scale-105"
-          style={{
-            height: member.photoHeight ?? '100%',
-            objectPosition: member.photoPosition,
-            transform: member.photoZoom ? `scale(${member.photoZoom})` : undefined,
-            transformOrigin: member.photoPosition ?? 'center',
-          }}
-          loading="lazy"
-        />
-      </div>
-      <div className="p-6">
-        <div className="mb-4 flex items-start justify-between gap-3">
-          <div>
-            {member.role ? (
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">{member.role}</p>
-            ) : null}
-            <h3 className={`${member.role ? 'mt-1' : ''} font-serif text-2xl font-bold text-slate-900`}>{member.name}</h3>
+      <div>
+        <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+          <img
+            src={member.photo}
+            alt={`${member.name}, ${member.role}`}
+            className="w-full object-cover transition duration-500 group-hover:scale-105"
+            style={{
+              height: member.photoHeight ?? '100%',
+              objectPosition: member.photoPosition,
+              transform: member.photoZoom ? `scale(${member.photoZoom})` : undefined,
+              transformOrigin: member.photoPosition ?? 'center',
+            }}
+            loading="lazy"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-end p-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-slate-900 shadow-md backdrop-blur-sm">
+              View full details <ArrowRight className="h-3 w-3 text-blue-600" />
+            </span>
           </div>
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
-            {String(index + 1).padStart(2, '0')}
-          </span>
         </div>
-        <p className="mb-3 text-sm font-semibold text-slate-500">{member.credentials}</p>
-        <p className="text-sm leading-relaxed text-slate-600">{member.summary}</p>
+
+        <div className="p-6 pb-2">
+          <div className="mb-3 flex items-start justify-between gap-3">
+            <div>
+              {member.role ? (
+                <span className="inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.15em] text-blue-700">
+                  {member.role}
+                </span>
+              ) : null}
+              <h3 className={`${member.role ? 'mt-2' : ''} font-serif text-2xl font-bold text-slate-900 transition-colors group-hover:text-blue-600`}>
+                {member.name}
+              </h3>
+            </div>
+            <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-500">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+
+          {member.credentials ? (
+            <div className="mb-3 flex items-center gap-1.5 text-xs font-semibold text-slate-500">
+              <Award className="h-3.5 w-3.5 text-blue-600 flex-shrink-0" />
+              <span className="truncate">{member.credentials}</span>
+            </div>
+          ) : null}
+
+          <p className="text-sm leading-relaxed text-slate-600 line-clamp-3">
+            {member.summary}
+          </p>
+        </div>
+      </div>
+
+      <div className="p-6 pt-0">
+        <div className="flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-semibold text-blue-600 transition-colors group-hover:text-blue-700">
+          <span>Read profile</span>
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+        </div>
       </div>
     </motion.div>
   );
 }
 
 export default function Team() {
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const officeLocationCount = officeLocations.length;
 
   return (
@@ -543,7 +664,58 @@ export default function Team() {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {managementTeam.map((member, index) => (
-              <ManagementCard key={member.name} member={member} index={index} />
+              <ManagementCard
+                key={member.name}
+                member={member}
+                index={index}
+                onSelect={() => setSelectedMember(member)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mb-14 max-w-3xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Finance Team</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">Financial stewardship.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              Building robust controls, transparent reporting, and disciplined planning to support sustainable growth.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:max-w-4xl">
+            {financeTeam.map((member, index) => (
+              <ManagementCard
+                key={member.name}
+                member={member}
+                index={index}
+                onSelect={() => setSelectedMember(member)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mb-14 max-w-3xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">Legal Team</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-slate-900 md:text-5xl">Legal & Compliance.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              Overseeing legal operations, compliance, and risk management across all our engagements.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:max-w-4xl">
+            {legalTeam.map((member, index) => (
+              <ManagementCard
+                key={member.name}
+                member={member}
+                index={index}
+                onSelect={() => setSelectedMember(member)}
+              />
             ))}
           </div>
         </div>
@@ -561,7 +733,12 @@ export default function Team() {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:max-w-4xl">
             {humanResourceTeam.map((member, index) => (
-              <ManagementCard key={member.name} member={member} index={index} />
+              <ManagementCard
+                key={member.name}
+                member={member}
+                index={index}
+                onSelect={() => setSelectedMember(member)}
+              />
             ))}
           </div>
         </div>
@@ -579,7 +756,12 @@ export default function Team() {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {technicalManagement.map((member, index) => (
-              <ManagementCard key={member.name} member={member} index={index} />
+              <ManagementCard
+                key={member.name}
+                member={member}
+                index={index}
+                onSelect={() => setSelectedMember(member)}
+              />
             ))}
           </div>
         </div>
@@ -622,6 +804,12 @@ export default function Team() {
           </Reveal>
         </div>
       </section>
+
+      {/* Profile Detail Modal */}
+      <MemberModal
+        member={selectedMember}
+        onClose={() => setSelectedMember(null)}
+      />
     </div>
   );
 }
