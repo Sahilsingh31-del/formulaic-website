@@ -79,7 +79,7 @@ const managementTeam = [
     role: 'Associate Director',
     credentials: 'B.Tech Civil, MBA (RICS)',
     summary: 'Bridging the gap between core engineering fundamentals and strategic real estate management for optimal asset value.',
-    photo: '/team/management-04.png',
+    photo: '/team/zuber-khan.jpg',
   },
   {
     name: 'Sarthak Jain',
