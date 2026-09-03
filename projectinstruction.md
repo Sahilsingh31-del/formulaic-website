@@ -1,8 +1,9 @@
 # Project Instructions & Deployment Guide
 
-This document outlines the setup, deployment workflow, domain notes, and stable version metadata for the **Formulaic Website** project.
+This document outlines the setup, deployment workflow, domain notes, team structure, SEO/AI schema, and stable version metadata for the **Formulaic Website** project.
 
-**Last updated:** July 29, 2026
+**Last updated:** September 3, 2026  
+**Status:** Stable Production Release (`v1.2.0`)
 
 ---
 
@@ -24,17 +25,18 @@ git push origin main
 
 ## 2. Live URLs & Vercel Deployment
 
-### Production / Beta Alias
-- **Primary live link**: [https://formulaic-website-beta.vercel.app](https://formulaic-website-beta.vercel.app)
+### Production Domain & Aliases
+- **Primary Live Domain**: [https://formulaic.in](https://formulaic.in)
+- **Direct Vercel Deployment**: [https://formulaic-website-fmsxngqy1-sandhusahil4-6636s-projects.vercel.app](https://formulaic-website-fmsxngqy1-sandhusahil4-6636s-projects.vercel.app)
 - **Vercel Project**: `formulaic-website`
-- **Vercel Org / Team**: `sandhusahil4-6636s-projects` (`team_PSwAP2QRD4m2e8JS4i4jFGL1`)
+- **Vercel Org / Team**: `sandhusahil4-6636s-projects` (`sandhusahil4-6636`)
 
 ### Deploy from Terminal
 ```bash
 # Preview
 npx vercel
 
-# Production (aliases to formulaic-website-beta.vercel.app)
+# Production (instantly aliases to https://formulaic.in)
 npx vercel --prod --yes
 ```
 
@@ -46,114 +48,123 @@ npx vercel --prod --yes
 
 ---
 
-## 3. Custom Domain (`formulaic.in`) — Important
+## 3. Production Domain & DNS Status (`formulaic.in`)
 
-| Item | Current status |
+| Item | Current Status |
 |------|----------------|
+| **Domain** | `https://formulaic.in` (SSL Active, HTTP -> HTTPS redirection) |
 | **Registrar** | GoDaddy |
-| **DNS provider** | **WebHostBox** (not GoDaddy DNS Records) |
-| **Nameservers** | `ns1.bh-69.webhostbox.net` / `ns2.bh-69.webhostbox.net` |
-| **Old website A record** | `208.91.199.118` (WebHostBox) |
-| **Email (`*@formulaic.in`)** | **Google Workspace** (MX → `ASPMX.L.GOOGLE.COM` etc.) |
-| **cPanel login** | `https://bh-69.webhostbox.net:2083` |
-
-### Safe cutover to Vercel (do not break mail)
-1. In Vercel → Project → **Settings → Domains**, add `formulaic.in` and `www.formulaic.in`.
-2. In **WebHostBox / cPanel → Zone Editor**, update **only**:
-   - **A** `@` → Vercel IP (usually `76.76.21.21`, or whatever Vercel shows)
-   - **CNAME** `www` → `cname.vercel-dns.com` (or whatever Vercel shows)
-3. **Do not touch** MX, SPF/TXT, DMARC, or EasyDMARC-related records — email stays on Google.
-
-### If WebHostBox access is missing
-- Search welcome / “New Account Information” email for cPanel credentials.
-- Or temporarily move nameservers to GoDaddy **only after copying all MX + SPF/DMARC records**, otherwise mail breaks.
+| **DNS Provider** | WebHostBox / cPanel Zone Editor |
+| **A Record (@)** | Pointed to Vercel Production IP (`76.76.21.21`) |
+| **CNAME (www)** | Pointed to `cname.vercel-dns.com` |
+| **Email (`*@formulaic.in`)** | Google Workspace (MX records preserved on WebHostBox) |
 
 ---
 
-## 4. Site Structure (Key Routes)
+## 4. Branding & Favicon Suite
 
-| Route | Page |
-|-------|------|
-| `/` | Home |
-| `/about` | About |
-| `/team` | Team |
-| `/careers` | Careers |
-| `/network` | Network |
-| `/offices` | Offices |
-| `/technology` | Technology |
-| `/accreditations` | Accreditations |
-| `/services`, `/services/:slug` | Services + detail |
-| `/sectors`, `/sectors/:slug` | Sectors + detail |
-| `/process` | Process |
-| `/clients` | Clients (curated 20 banks) |
-| `/insights` | Insights |
-| `/case-studies` | Case Studies |
-| `/testimonials` | Testimonials |
-| `/faq` | FAQ |
-| `/contact` | Contact |
-| `/privacy`, `/terms` | Legal |
-| `*` | 404 |
+All favicon assets are generated from the official Formulaic logo mark with an elegant white rounded squircle badge, ensuring optimal contrast on both dark and light browser tabs:
 
-Shared data lives in:
-- `src/data/site.ts` — services, sectors, nav/content helpers
-- `src/data/offices.ts` — office locations
-- `src/data/featuredClients.ts` — curated Clients page list
-- `src/data/clientLogoManifest.ts` / `bankLogoDomains.ts` — logo assets & domains
-- `src/components/animated.tsx` — shared motion / hero / reveal helpers
-- `src/components/Layout.tsx` — nav + footer
+- **SVG Icon**: `public/favicon.svg` (Crisp vector/high-res base64)
+- **Google Search Favicon**: `public/favicon-48x48.png` (48x48 PNG required by Googlebot)
+- **Standard Desktop Icons**: `public/favicon-32x32.png`, `public/favicon-16x16.png`, `public/favicon.ico`
+- **Mobile Icons**: `public/apple-touch-icon.png` (180x180), `public/android-chrome-192x192.png`, `public/android-chrome-512x512.png`
+- **Cache-Buster**: Configured in `index.html` via `?v=20260903c` to ensure browsers immediately fetch the updated icon without holding stale cache.
 
 ---
 
-## 5. Team Page Notes (`src/pages/Team.tsx`)
+## 5. SEO & AI Search Engine Optimization (LLM & SGE Ready)
 
-### Featured leadership
-- **Suneet Tyagi** — Managing Director
-- **Junaid Kanth** — Chief Executive Officer
-- **Prakash Kumar** — Chief Financial Officer
+The website is comprehensively optimized for Google Search, Bing, Google Gemini (AI Overviews), SearchGPT, Perplexity, and Claude:
 
-### Management (selected)
-Includes Satish Bogra, Mayank Kaushik, Deepak Swain, **Lalit Mohan**, Zuber Khan, Sarthak Jain, Mohit Mahajan, Aakash Sharma, **Pankaj Tyagi** (Head Business Development).
+### Structured Data (JSON-LD)
+`index.html` includes rich `Corporation` schema with:
+- **`knowsAbout` Entity Tags**: Explicit authority mapping for:
+  - Asset Valuation, Real Estate Valuation, Plant & Machinery Valuation
+  - Engineering Inspection, Technical Due Diligence, Chartered Engineer Certification
+  - IBBI Registered Valuers, RICS Standards, Lender Independent Engineers
+- **Official Address**: Joy Tower, C Block, Phase 2, Industrial Area, Sector 62, Noida, Uttar Pradesh 201309
+- **Scale Signals**: 1500+ employees, 100+ office locations, Pan-India operations
+- **SameAs Entity Linking**: Official LinkedIn company page linked to solidify Google Knowledge Graph entity.
 
-### Other sections
-- **Human Resource**: Khushboo, Devanshi
-- **Technical Team**: region-labeled cards (first names); photos under `public/team/`
+### Dynamic Route Titles
+`src/components/Layout.tsx` dynamically updates `document.title` on every route change (e.g., `Leadership & Regional Team | Formulaic Engineers`, `Valuation & Technical Services | Formulaic Engineers`, etc.).
 
-### Photo assets
-- Team headshots: `public/team/*.png` (and some `.jpg`)
-- Crop tweaks per card via optional `photoPosition`, `photoHeight`, `photoZoom` on member objects
-- Example: Pankaj Tyagi uses top-aligned crop so hair is not clipped
-
----
-
-## 6. Clients Page
-
-- Shows a curated list of **20** banking / finance partners from `src/data/featuredClients.ts`
-- Logos resolved via `clientLogoManifest`
-- Logo download helper script: `scripts/download-client-logos.mjs`
+### Sitemaps & Crawlers
+- **Sitemap**: `public/sitemap.xml` with all 14 canonical URLs pointing to `https://formulaic.in`.
+- **Robots.txt**: `public/robots.txt` allowing all search engine & AI bots (`User-agent: *`) with host and sitemap declarations.
 
 ---
 
-## 7. Last Stable Versions & Dependencies
+## 6. Team Page Architecture (`src/pages/Team.tsx`)
 
-As of July 29, 2026, the application builds successfully with:
+### 1. Featured Leadership
+- **Suneet Tyagi** — Managing Director (`/team/suneet.png`)
 
-- **React / React DOM**: `^19.0.0`
-- **Vite**: `^6.2.0`
-- **Tailwind CSS**: `^4.1.14` (`@tailwindcss/vite`)
-- **TypeScript**: `~5.8.2`
-- **Motion**: `^12.23.24` (`motion/react`)
-- **React Router DOM**: `^7.14.0`
-- **Leaflet**: `^1.9.4` (offices / map UI)
-- **Lucide React**: `^0.546.0`
+### 2. Management Team
+- **Junaid Kanth** — Chief Executive Officer (`/team/junaid.png`)
+- **Satish Bogra** — Chief Technology Officer
+- **Mayank Kaushik** — Business Operations
+- **Lalit Mohan** — Project Management
+- **Zuber Khan** — Operations Head (Updated portrait `/team/zuber-khan.jpg` with `50% 12%` framing)
+- **Sarthak Jain** — Head Credit & Risk
+- **Mohit Mahajan** — Risk Management
+- **Aakash Sharma** — Head Audit & Compliance
+- **Pankaj Tyagi** — Head Business Development (`/team/pankaj.png`)
 
-### Stability checks
+### 3. Finance Team
+- **Prakash Kumar** — Chief Financial Officer (`/team/prakash.png` with original top framing)
+
+### 4. Legal Team
+- **Khushboo Monga** — Legal Head (`/team/khushboo-monga.jpg` with `50% 12%` framing)
+
+### 5. Technical Team (Regional Operations)
+- **Aakash** — Agra (`Regional leadership`)
+- **Vikrant Sharma** — Business Development (`Regional Management`, photo `/team/vikrant-sharma.jpg` with `50% 12%` framing)
+- **Nishu** — Jharkhand (`Regional leadership`)
+- **Manjeet** — Punjab (`Regional technical management`)
+- **Ravi** — Punjab (`Regional technical management`)
+- **Ankit** — Rajasthan (`Regional technical management`)
+
+### Interactive Profile Modal
+- Every team card is clickable and opens an accessible, animated `MemberModal` dialog with backdrop blur, full biography, and responsibilities.
+
+---
+
+## 7. Key Site Routes
+
+| Route | Page Component | Description |
+|-------|----------------|-------------|
+| `/` | `Home.tsx` | Hero video, core services, statistics, interactive maps |
+| `/about` | `About.tsx` | Company history, mission, vision, values |
+| `/team` | `Team.tsx` | Executive leadership, management, finance, legal, and technical teams |
+| `/services`, `/services/:slug` | `Services.tsx`, `ServiceDetail.tsx` | Valuation, CE certification, TEV studies, Lenders engineer |
+| `/sectors`, `/sectors/:slug` | `Sectors.tsx`, `SectorDetail.tsx` | Real estate, infrastructure, industrial, BFSI |
+| `/network` | `Network.tsx` | National operational reach and capabilities |
+| `/offices` | `Offices.tsx` | 100+ office locations directory with interactive search |
+| `/technology` | `Technology.tsx` | Proprietary inspection software & valuation engines |
+| `/accreditations` | `Accreditations.tsx` | IBBI, RICS, IOV, CE, ISO compliance credentials |
+| `/clients` | `Clients.tsx` | 20+ empanelled national banks & financial institutions |
+| `/process` | `Process.tsx` | 6-step rigorous valuation & risk assessment methodology |
+| `/insights` | `Insights.tsx` | Industry reports, market trends, whitepapers |
+| `/case-studies` | `CaseStudies.tsx` | High-value asset assessment case studies |
+| `/testimonials` | `Testimonials.tsx` | Verified institutional client endorsements |
+| `/careers` | `Careers.tsx` | Open roles & culture |
+| `/faq` | `FAQ.tsx` | Institutional client FAQs |
+| `/contact` | `Contact.tsx` | Noida headquarters & contact forms |
+
+---
+
+## 8. Stability Checks & Verification
+
+To verify build and type correctness before any push:
 ```bash
-npm run lint    # tsc --noEmit
-npm run build   # vite production build
+npm run build   # Vite production build (must output 0 errors)
 ```
 
-### Current Stability Status
-- Production deploys to Vercel are succeeding and aliased to `formulaic-website-beta.vercel.app`.
-- Team leadership titles/names updated (CFO title, Lalit Mohan, Ankit & Pankaj photos).
-- Clients page uses curated featured banks (not the full CSV dump in UI).
-- Custom domain `formulaic.in` is **not yet pointed at Vercel**; old site still on WebHostBox until DNS A/CNAME cutover.
+**Current Stability Status (September 3, 2026):**
+- Build: Passing (`vite v6.4.2`, 0 errors)
+- Production: Live and healthy on `https://formulaic.in`
+- Favicon: Multi-size suite active with white squircle contrast badge
+- Team: All photo updates, reorderings, and new designations verified
+- SEO/AI: Comprehensive Schema.org JSON-LD and dynamic titles deployed
