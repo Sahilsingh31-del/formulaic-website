@@ -119,10 +119,8 @@ const financeTeam = [
     role: 'Chief Finance Officer',
     credentials: 'Finance leadership',
     summary: 'Building robust controls, transparent reporting, and disciplined planning that support Formulaic\'s expansion across India while safeguarding trust.',
-    photo: '/team/prakash.png',
-    photoPosition: '50% 0%',
-    photoHeight: '125%',
-    photoZoom: 0.9,
+    photo: '/team/prakash-kumar.jpg',
+    photoPosition: '50% 10%',
   },
 ];
 
@@ -330,6 +328,13 @@ const technicalManagement = [
     photoPosition: '50% 0%',
     photoHeight: '125%',
     photoZoom: 0.9,
+  },
+  {
+    name: 'Vikrant Sharma',
+    role: 'Regional Head Business Development',
+    credentials: 'Business development',
+    summary: 'Leading regional business development, institutional lender partnerships, and client growth initiatives across key markets.',
+    photo: '/team/management-07.jpg',
   },
 ];
 
