@@ -172,8 +172,8 @@ const technicalManagement = [
   },
   {
     name: 'Vikrant Sharma',
-    role: 'Business Development - Regional Management',
-    credentials: 'Business development - regional management',
+    role: 'Business Development',
+    credentials: 'Regional Management',
     summary: 'Leading business development and regional management initiatives, institutional lender partnerships, and client growth.',
     photo: '/team/vikrant-sharma.jpg',
     photoPosition: '50% 12%',
