@@ -68,7 +68,7 @@ const managementTeam = [
     photo: '/team/junaid-kanth.png',
   },
   {
-    name: 'Lalit Sharma',
+    name: 'Lalit Mohan',
     role: 'Associate Director',
     credentials: 'B.Tech Civil, IOV',
     summary: 'Committed to upholding the highest standards of valuation integrity and professional practice in every engagement.',
